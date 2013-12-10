@@ -18,7 +18,7 @@ public class Server {
 	
 	
 
-	private String bid(BidMessage bid) {
+	public String bid(BidMessage bid) {
 		User bidder = null;
 		for(int i=0;i < user.size();i++) {
 			if(bid.getName().equals(user.get(i).getName())) {
@@ -43,6 +43,40 @@ public class Server {
 			}
 		}
 		return "There is no Auction with this ID!";
+	}
+	
+	public String create(CreateMessage create) {
+		User creater = null;
+		for(int i=0;i < user.size();i++) {
+			if(create.getName().equals(user.get(i).getName())) {
+				creater = user.get(i);
+			}
+		}
+		if (creater == null) {
+			return "This User doesn't exists!";
+		}
+		auction.add(new Auction(creater,create.getDesc(),""+create.getDuration()));
+		return "You have created a new auction!";	
+	}
+	
+	public String login (String name) {
+		User loger = null;
+		for(int i=0;i < user.size();i++) {
+			if(name.equals(user.get(i).getName())) {
+				loger = user.get(i);
+			}
+		}
+		if(loger == null) {
+			loger = new User();
+			loger.setName(name);
+			loger.setAdresse("");
+			loger.setTcpPort(123);
+			loger.setUdpPort(123);
+			loger.setActive(true);
+			loger.setMessages(new ArrayList<Strin>);
+		}
+		return name;
+		
 	}
 
 	private void notify(Message message) {

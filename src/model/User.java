@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class User {
 	private String name;
@@ -8,7 +8,7 @@ public class User {
 	private int udpPort;
 	private int tcpPort;
 	boolean isActive;
-	private List<String> messages;
+	private ArrayList<String> messages;
 	
 	public User() {
 		
@@ -87,14 +87,14 @@ public class User {
 	/**
 	 * @return the messages
 	 */
-	public List<String> getMessages() {
+	public ArrayList<String> getMessages() {
 		return messages;
 	}
 
 	/**
 	 * @param messages the messages to set
 	 */
-	public void setMessages(List<String> messages) {
+	public void setMessages(ArrayList<String> messages) {
 		this.messages = messages;
 	}
 	
