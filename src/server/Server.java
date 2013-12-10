@@ -73,14 +73,54 @@ public class Server {
 			loger.setTcpPort(123);
 			loger.setUdpPort(123);
 			loger.setActive(true);
-			loger.setMessages(new ArrayList<Strin>);
+			loger.setMessages(new ArrayList<String>());
+			return "Succesfully loged in as: "+loger.getName();
 		}
-		return name;
+		else if (loger.isActive()==false){
+			loger.setAdresse("");
+			loger.setTcpPort(123);
+			loger.setUdpPort(123);
+			loger.setActive(true);
+			return "Succesfully loged in as: "+loger.getName();
+		}
+		return "You are allready loged in please log out first!";
+		
+	}
+	
+	public String logout(String name) {
+		User loger = null;
+		for(int i=0;i < user.size();i++) {
+			if(name.equals(user.get(i).getName())) {
+				loger = user.get(i);
+			}
+		}
+		if (loger != null) {
+			loger.setActive(false);
+			//TODO schliessen der Verbindungen
+			return "Succesfully loged out as: "+loger.getName();
+		}
+		return "Error you must log in first!";
+	}
+	
+	public String list () {
+		String out = "";
+		for(int i=0;i< auction.size();i++) {
+			String hilf;
+			if (auction.get(i).getLastUser() == null) {
+				hilf = "none";
+			}
+			else {
+				hilf=auction.get(i).getLastUser().getName();
+			}
+			out+= "ID: "+ auction.get(i).getId()+ "Description: " +auction.get(i).getDescription()
+					+ "Highestbid: " + auction.get(i).getHighestBid() + " from "+hilf;
+		}
+		return out;
 		
 	}
 
 	private void notify(Message message) {
-		
+		//TODO die Ausgaben der Methoden mittels notify an die User weritergeben oder speichern
 	}
 	
 	

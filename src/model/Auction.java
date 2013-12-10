@@ -10,6 +10,7 @@ public class Auction {
 	private Date deadline;
 	
 	public Auction(User owner,String description,String duration){
+		highestBid=0.0;
 		this.owner=owner;
 		this.description=description;
 		deadline=new Date();
