@@ -11,4 +11,6 @@ public class UserHandler implements Runnable{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	notify
 }
