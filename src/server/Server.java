@@ -9,7 +9,7 @@ public class Server {
 	private int tcpPort;
 	private ArrayList<User> user;
 	private ArrayList<Auction> auction;
-//	private String todo;
+	private String todo;
 	private AuctionHandler ahandler;
 	
 	public Server() {
