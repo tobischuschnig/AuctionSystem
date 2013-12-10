@@ -2,15 +2,14 @@ package server;
 
 import java.util.ArrayList;
 
-import model.Auction;
-import model.User;
+import model.*;
 
-public class Server implements Runnable{
+public class Server {
 
 	private int tcpPort;
 	private ArrayList<User> user;
 	private ArrayList<Auction> auction;
-	private String todo;
+//	private String todo;
 	private AuctionHandler ahandler;
 	
 	public Server() {
@@ -18,22 +17,37 @@ public class Server implements Runnable{
 	}
 	
 	
-	@Override
-	public void run() {
-		if(todo.equals("!bid")) {
-			
+
+	private String bid(BidMessage bid) {
+		User bidder = null;
+		for(int i=0;i < user.size();i++) {
+			if(bid.getName().equals(user.get(i).getName())) {
+				bidder = user.get(i);
+			}
+		}
+		if (bidder == null) {
+			return "This User doesn't exists!";
 		}
 		
+		for(int i=0;i< auction.size();i++) {
+			if(bid.getId() == auction.get(i).getId()) {
+				if(auction.get(i).getHighestBid() < bid.getAmount()) {
+					auction.get(i).setHighestBid(bid.getAmount());
+					auction.get(i).setLastUser(bidder);
+					return "You successfully bid with "+bid.getAmount()+" on '"
+						+auction.get(i).getDescription()+"'.";
+				}
+				else {
+					return "Your bid must be higher then the current bid! The current bid ist: "+auction.get(i).getHighestBid();
+				}
+			}
+		}
+		return "There is no Auction with this ID!";
 	}
-
 
 	private void notify(Message message) {
 		
 	}
-	
-	
-	
-	
 	
 	
 	/**
