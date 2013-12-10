@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import server.Server;
+import server.UserHandler;
 
 /**
  * Wartet auf eingehende Verbindungen zum Server.
@@ -31,7 +32,7 @@ public class ReceiveConnection implements Runnable{
 	 * Wird eine Verbindung aufgenommen, so wird diese an einen UserHandler weitergeleitet
 	 */
 	public void run(){
-		ServerSocket ss;
+		ServerSocket ss = null;
 		try {
 			ss = new ServerSocket(tcpPort);
 		} catch (IOException e) {
@@ -39,9 +40,20 @@ public class ReceiveConnection implements Runnable{
 			e.printStackTrace();
 		}
 		while(listen){
-			Socket client = ss.accept();
+			Socket client = null;
+			try {
+				client = ss.accept();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			new UserHandler(client);
 		}
-		ss.close();
+		try {
+			ss.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
