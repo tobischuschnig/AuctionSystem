@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Dominik Valka
  * @version 2013-12-10
  */
-public class Client implements Runnable{
+public class Client{
 	String username;
 	boolean loggedIn;
 	String host;
@@ -47,7 +47,6 @@ public class Client implements Runnable{
 	 * Holt dauernd die Eingabe des Users und leitet sie an den Server
 	 * ueber entsprechende Methoden weiter
 	 */
-	@Override
 	public void run() {
 		while(true){
 		Scanner in=new Scanner(System.in);
@@ -76,7 +75,11 @@ public class Client implements Runnable{
 				login();
 			}else if(eingabe.startsWith("!logout")){
 				logout();
-			}else{
+			}else if(eingabe.startsWith("!end")){
+				in.close();
+				System.exit(0);
+			}
+			else{
 				System.out.println("Could not recognize input\nPlease try again");
 			}
 		}
