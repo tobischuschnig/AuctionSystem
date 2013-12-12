@@ -9,12 +9,12 @@ public class Auction {
 	private String description;
 	private Date deadline;
 	
-	public Auction(User owner,String description,String duration){
+	public Auction(User owner,String description,Long duration){
 		highestBid=0.0;
 		this.owner=owner;
 		this.description=description;
 		deadline=new Date();
-		deadline.setTime(deadline.getTime()+Long.parseLong(duration)*1000);
+		deadline.setTime(deadline.getTime()+duration*1000);
 	}
 	public boolean isActive(){
 		return false;

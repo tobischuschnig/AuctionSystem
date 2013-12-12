@@ -37,6 +37,9 @@ public class Client{
 	public void bid(int id,double amount){
 		System.out.println("BID");
 	}
+	public void create(Long duration,String description){
+		System.out.println("CREATE");
+	}
 	/**
 	 * Loggt den Benutzer aus
 	 */
@@ -51,7 +54,7 @@ public class Client{
 		while(true){
 		Scanner in=new Scanner(System.in);
 			System.out.print(">");
-			String eingabe=in.nextLine();
+			String eingabe=in.nextLine().toLowerCase();
 			if(eingabe.startsWith("!list")){
 				list();
 			}else if(eingabe.startsWith("!bid")){
@@ -73,6 +76,17 @@ public class Client{
 					System.out.println("Please enter User like:\n!login Username");
 				}
 				login();
+			}else if(eingabe.startsWith("!create")){
+				String[] werte=eingabe.split(" ");
+				if(werte.length==3){
+					try{
+					create(Long.parseLong(werte[1]),werte[2]);
+					}catch(NumberFormatException e){
+						System.out.println("Duration was entered incorrect, not a number!");
+					}
+				}else{
+				System.out.println("Please enter Create like:\n!create duration description");
+			}
 			}else if(eingabe.startsWith("!logout")){
 				logout();
 			}else if(eingabe.startsWith("!end")){
