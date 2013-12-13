@@ -55,6 +55,7 @@ public class Client{
 		Scanner in=new Scanner(System.in);
 			System.out.print(">");
 			String eingabe=in.nextLine().toLowerCase();
+			if(eingabe.startsWith(" ")) eingabe=eingabe.substring(1);
 			if(eingabe.startsWith("!list")){
 				list();
 			}else if(eingabe.startsWith("!bid")){
