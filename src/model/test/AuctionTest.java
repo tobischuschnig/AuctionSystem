@@ -2,9 +2,13 @@ package model.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import Client.*;
 import connect.*;
 import model.*;
@@ -17,89 +21,102 @@ import server.*;
  */
 public class AuctionTest {
 	Auction test;
+	User tuser;
 	@Before
 	public void setUp() throws Exception {
-		//abhängigkeit herausfinden
-		//test=new Auction();
+		tuser=new User();
+		tuser.setActive(false);
+		tuser.setName("user");
+		tuser.setMessages(new ArrayList<String>());
+		tuser.setTcpPort(123);
+		tuser.setUdpPort(123);
+		
+		test=new Auction(tuser,"bla",(long)100);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testAuction() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testIsActive() {
-		fail("Not yet implemented");
+		assertFalse(test.isActive());
 	}
 
 	@Test
 	public void testBid() {
-		fail("Not yet implemented");
+		assertFalse(test.bid(tuser,10));
 	}
 
 	@Test
 	public void testGetId() {
-		fail("Not yet implemented");
+		test.setId(10);
+		assertEquals(10,test.getId());
 	}
 
 	@Test
 	public void testSetId() {
-		fail("Not yet implemented");
+		test.setId(10);
 	}
 
 	@Test
 	public void testGetHighestBid() {
-		fail("Not yet implemented");
+		test.setHighestBid(10.01);
+		test.getHighestBid();
+		
 	}
 
 	@Test
 	public void testSetHighestBid() {
-		fail("Not yet implemented");
+		test.setHighestBid(10);
 	}
 
 	@Test
 	public void testGetLastUser() {
-		fail("Not yet implemented");
+		test.setLastUser(tuser);
+		assertEquals(tuser,test.getLastUser());
+		
 	}
 
 	@Test
 	public void testSetLastUser() {
-		fail("Not yet implemented");
+		test.setLastUser(tuser);
 	}
 
 	@Test
 	public void testGetOwner() {
-		fail("Not yet implemented");
+		test.setOwner(tuser);
+		assertEquals(tuser,test.getOwner());
 	}
 
 	@Test
 	public void testSetOwner() {
-		fail("Not yet implemented");
+		test.setOwner(tuser);
 	}
 
 	@Test
 	public void testGetDescription() {
-		fail("Not yet implemented");
+		test.setDescription("bla");
+		assertEquals("bla",test.getDescription());
 	}
 
 	@Test
 	public void testSetDescription() {
-		fail("Not yet implemented");
+		test.setDescription("bla");
 	}
 
 	@Test
 	public void testGetDeadline() {
-		fail("Not yet implemented");
+		Date a=new Date();
+		test.setDeadline(a);
+		assertEquals(a,test.getDeadline());
 	}
 
 	@Test
 	public void testSetDeadline() {
-		fail("Not yet implemented");
+		Date a=new Date();
+		test.setDeadline(a);
 	}
 
 }

@@ -7,7 +7,7 @@ public class BidMessage implements Message{
 	
 	@Override
 	public String getName() {
-		return null;
+		return name;//war vorher null -huang
 	}
 
 	/**

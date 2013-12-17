@@ -28,32 +28,35 @@ public class CreateMessageTest {
 
 	@Test
 	public void testGetName() {
-		fail("Not yet implemented");
+		test.setName("user");
+		assertEquals("user",test.getName());
 	}
 
 	@Test
 	public void testGetDesc() {
-		fail("Not yet implemented");
+		test.setDesc("bla");
+		assertEquals("bla",test.getDesc());
 	}
 
 	@Test
 	public void testSetDesc() {
-		fail("Not yet implemented");
+		test.setDesc("bla");
 	}
 
 	@Test
 	public void testGetDuration() {
-		fail("Not yet implemented");
+		test.setDuration(10);
+		assertEquals(10,test.getDuration());
 	}
 
 	@Test
 	public void testSetDuration() {
-		fail("Not yet implemented");
+		test.setDuration(10);
 	}
 
 	@Test
 	public void testSetName() {
-		fail("Not yet implemented");
+		test.setName("user");
 	}
 
 }

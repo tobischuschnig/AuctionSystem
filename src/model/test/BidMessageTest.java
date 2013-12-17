@@ -28,32 +28,35 @@ public class BidMessageTest {
 
 	@Test
 	public void testGetName() {
-		fail("Not yet implemented");
+		test.setName("user");
+		assertEquals("user",test.getName());
 	}
 
 	@Test
 	public void testGetId() {
-		fail("Not yet implemented");
+		test.setId(1);
+		assertEquals(1,test.getId());
 	}
 
 	@Test
 	public void testSetId() {
-		fail("Not yet implemented");
+		test.setId(1);
 	}
 
 	@Test
 	public void testGetAmount() {
-		fail("Not yet implemented");
+		test.setAmount(1.1);
+		test.getAmount();
 	}
 
 	@Test
 	public void testSetAmount() {
-		fail("Not yet implemented");
+		test.setAmount(1.1);
 	}
 
 	@Test
 	public void testSetName() {
-		fail("Not yet implemented");
+		test.setName("user");
 	}
 
 }

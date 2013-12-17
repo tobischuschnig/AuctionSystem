@@ -6,7 +6,7 @@ public class CreateMessage implements Message{
 	private int duration;
 	@Override
 	public String getName() {
-		return null;
+		return name;//null wurde vorher zurŸckgeben -huang
 	}
 	/**
 	 * @return the desc

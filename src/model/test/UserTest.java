@@ -26,69 +26,69 @@ public class UserTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testUser() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetName() {
-		fail("Not yet implemented");
+		test.setName("user");
+		assertEquals("user",test.getName());
 	}
 
 	@Test
 	public void testSetName() {
-		fail("Not yet implemented");
+		test.setName("user");
 	}
 
 	@Test
 	public void testGetAdresse() {
-		fail("Not yet implemented");
+		test.setAdresse("adresse");
+		assertEquals("adresse",test.getAdresse());
 	}
 
 	@Test
 	public void testSetAdresse() {
-		fail("Not yet implemented");
+		test.setAdresse("adresse");
 	}
 
 	@Test
 	public void testGetUdpPort() {
-		fail("Not yet implemented");
+		test.setUdpPort(123);
+		assertEquals(123,test.getUdpPort());
 	}
 
 	@Test
 	public void testSetUdpPort() {
-		fail("Not yet implemented");
+		test.setUdpPort(123);
 	}
 
 	@Test
 	public void testGetTcpPort() {
-		fail("Not yet implemented");
+		test.setTcpPort(123);
+		assertEquals(123,test.getTcpPort());
 	}
 
 	@Test
 	public void testSetTcpPort() {
-		fail("Not yet implemented");
+		test.setTcpPort(123);
 	}
 
 	@Test
 	public void testIsActive() {
-		fail("Not yet implemented");
+		assertTrue(test.isActive());
 	}
 
 	@Test
 	public void testSetActive() {
-		fail("Not yet implemented");
+		test.setActive(true);
 	}
 
 	@Test
 	public void testGetMessages() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
 	public void testSetMessages() {
-		fail("Not yet implemented");
+		
 	}
 
 }
