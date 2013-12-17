@@ -26,14 +26,6 @@ public class UserHandlerTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testUserHandler() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testRun() {
-		fail("Not yet implemented");
-	}
 
 }

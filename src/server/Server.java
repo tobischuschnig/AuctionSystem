@@ -13,7 +13,8 @@ public class Server {
 	private AuctionHandler ahandler;
 	
 	public Server() {
-		
+		user=new ArrayList<User>();//initizalisierung vergessen!!!! - huang
+		auction=new ArrayList<Auction>();//initizalisierung vergessen!!!! - huang
 	}
 	
 	
@@ -44,18 +45,20 @@ public class Server {
 		}
 		return "There is no Auction with this ID!";
 	}
-	
-	public String create(CreateMessage create) {
+	////////////
+	//variablen namen geŠndert ein CreateMessage create sonst sehr verwirrend - huang
+	//id und startpreis fehlt!!!!!!!!!!!!!! -huang
+	public String create(CreateMessage createM) {
 		User creater = null;
 		for(int i=0;i < user.size();i++) {
-			if(create.getName().equals(user.get(i).getName())) {
+			if(createM.getName().equals(user.get(i).getName())) {
 				creater = user.get(i);
 			}
 		}
 		if (creater == null) {
 			return "This User doesn't exists!";
 		}
-		auction.add(new Auction(creater,create.getDesc(),""+create.getDuration()));
+		auction.add(new Auction(creater,createM.getDesc(),(long)createM.getDuration()));//casten vergessen- huang
 		return "You have created a new auction!";	
 	}
 	
@@ -66,6 +69,7 @@ public class Server {
 				loger = user.get(i);
 			}
 		}
+		
 		if(loger == null) {
 			loger = new User();
 			loger.setName(name);
@@ -74,6 +78,7 @@ public class Server {
 			loger.setUdpPort(123);
 			loger.setActive(true);
 			loger.setMessages(new ArrayList<String>());
+			user.add(loger);//user in die arraylist eintragen vergessen hab ich ausgebessert-huang
 			return "Succesfully loged in as: "+loger.getName();
 		}
 		else if (loger.isActive()==false){

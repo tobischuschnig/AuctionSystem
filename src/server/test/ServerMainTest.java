@@ -19,7 +19,9 @@ public class ServerMainTest {
 	ServerMain test;
 	@Before
 	public void setUp() throws Exception {
-		test=new ServerMain();
+		String[] args=new String[1];
+		args[0]="";
+		ServerMain.main(args);
 	}
 
 	@After
