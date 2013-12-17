@@ -2,18 +2,17 @@ package Client.test;
 
 import static org.junit.Assert.*;
 
+import java.io.*;
+import java.util.Scanner;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import Client.*;
 import connect.*;
 import model.*;
 import server.*;
-/**
- * 
- * @author Kuanlun Huang
- * @version 
- */
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,9 +20,10 @@ import org.junit.Test;
 
 public class ClientTest {
 	Client test;
+
 	@Before
 	public void setUp() throws Exception {
-		test=new Client();
+		test = new Client();
 	}
 
 	@After
@@ -32,32 +32,46 @@ public class ClientTest {
 
 	@Test
 	public void testLogin() {
-		test.login();
+		test.testeInput("!login");
+		
+		test.testeInput("!login user");
 	}
 
 	@Test
 	public void testList() {
-		test.list();
+		test.testeInput("!list");
 	}
 
 	@Test
 	public void testBid() {
-		test.bid(1, 1.1);
+		test.testeInput("!bid");
+
+		test.testeInput("!bid 1 10");
+
+		test.testeInput("!bid 1 1a0");
 	}
 
 	@Test
 	public void testCreate() {
-		test.create((long)1, "a");
+		test.testeInput("!create");
+		
+		test.testeInput("!create 1a hallo");
+		
+		test.testeInput("!create 1000000000000 hallo");
 	}
 
 	@Test
 	public void testLogout() {
-		test.logout();
+		test.testeInput("!logout");
 	}
 
 	@Test
 	public void testRun() {
-		//test.run();
+
+		test.testeInput(" !list");
+		test.testeInput("!end");
+		test.testeInput("!blabla");
+
 	}
 
 }

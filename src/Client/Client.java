@@ -1,5 +1,6 @@
 package Client;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -12,10 +13,22 @@ public class Client{
 	boolean loggedIn;
 	String host;
 	int tcpPort,udpPort;
+	boolean j=true;
+	String eingabe;
+	Scanner in;
 	
+	
+	public Client(){
+		eingabe="";
+	}
 	public static void main(String[] args) {
 		Client c=new Client();
 		c.run();
+	}
+	public void testeInput(String eingabe){
+		this.eingabe=eingabe;
+		j=true;
+		run();
 	}
 	/**
 	 * Die Methode leitet die Login Daten an den Server weiter
@@ -51,11 +64,19 @@ public class Client{
 	 * ueber entsprechende Methoden weiter
 	 */
 	public void run() {
-		while(true){
-		Scanner in=new Scanner(System.in);
+		//hab das boolean wert in einen variable getan um das programm sauber zu beenden
+		while(j){
+		if(eingabe.equals("")){
+			in=new Scanner(System.in);
 			System.out.print(">");
-			String eingabe=in.nextLine().toLowerCase();
-			if(eingabe.startsWith(" ")) eingabe=eingabe.substring(1);
+			String eingabe=in.nextLine()
+					.toLowerCase();
+		}else{
+			j=false;
+		}
+		
+			if(eingabe.startsWith(" ")) 
+				eingabe=eingabe.substring(1);
 			if(eingabe.startsWith("!list")){
 				list();
 			}else if(eingabe.startsWith("!bid")){
@@ -72,7 +93,7 @@ public class Client{
 			}else if(eingabe.startsWith("!login")){
 				String[] werte=eingabe.split(" ");
 				if(werte.length==2){
-						logout();
+						login();//ausgebessern!!!
 				}else{
 					System.out.println("Please enter User like:\n!login Username");
 				}
@@ -91,8 +112,10 @@ public class Client{
 			}else if(eingabe.startsWith("!logout")){
 				logout();
 			}else if(eingabe.startsWith("!end")){
-				in.close();
-				System.exit(0);
+				if(eingabe.equals("")){
+					in.close();
+				}
+				j=false;
 			}
 			else{
 				System.out.println("Could not recognize input\nPlease try again");
