@@ -39,7 +39,8 @@ public class ServerTest {
 		bmessage.setName("user");
 		bmessage.setAmount(10);
 		bmessage.setId(1);
-		//nicht exsitierenden user(ausgeloggt)
+		
+		//versucht zu bieten bei einen nicht exsitierenden user(bzw. ausgeloggt)
 		assertEquals("This User doesn't exists!",test.bid(bmessage));
 		
 		//exsitierenden user(eingeloggt)
@@ -64,25 +65,31 @@ public class ServerTest {
 		message.setDesc("Blabla");
 		message.setDuration(10);
 		
-		//nicht exstierender User(ausgeloggt)
+		//nicht exstierender User(ausgeloggt) eine auction erstellen
+		
 		assertEquals("This User doesn't exists!",test.create(message));
 		
-		//exstierender User(eingeloggt)
+		//exstierender User(eingeloggt) eine auction erstellen
+		//schaut ob die auctionlist um einen eintrag mehr hat
+		int z=test.getAuction().size();
 		test.login("user");
 		assertEquals("You have created a new auction!",test.create(message));
+		assertEquals(z+1,test.getAuction().size());
 		
 	}
 
 	@Test
 	public void testLogin() {
-		//erstellen des user
+		//erstellen eines user
+		//erstellung eines zweiten user mit den gleichen namen hat keinen sinn
+		//da es davor überprüft wird ob der user in der userliste schon exisiter
 		assertEquals("Succesfully loged in as: user",test.login("user"));
 		
 		
 		//als eingeloggten user sich nochmal anzumelden
 		assertEquals("You are allready loged in please log out first!",test.login("user"));
 		
-		//user login 
+		//login eines user
 		ArrayList<User>usertest=test.getUser();
 		usertest.get(0).setActive(false);
 		test.setUser(usertest);
@@ -95,30 +102,41 @@ public class ServerTest {
 		assertEquals("Error you must log in first!",test.logout("hallo"));
 		
 		//normal ausloggen
+		//überprüft als erstes ob der user auch eingeloggt 
+		//ist und nach dem ausgeloggt ob er ausgeloggt ist
 		test.login("user");
+		int z=test.getUser().size()-1;
+		assertTrue(test.getUser().get(z).isActive());
 		assertEquals("Succesfully loged out as: user",test.logout("user"));
+		assertFalse(test.getUser().get(z).isActive());
+		
 		
 	}
 
 	@Test
 	public void testList() {
-		//keinen bieter
+		//keinen auctionen vorhanden
+		assertEquals("",test.list());
+		
+		//daten der aution
 		CreateMessage message=new CreateMessage();
 		message.setName("user");
 		message.setDesc("Blabla");
 		message.setDuration(10);
+		
+		//keine bieter auf die auction geboten haben
 		test.login("user");
 		assertEquals("You have created a new auction!",test.create(message));
-		test.list();
+		assertEquals("ID: 0Description: BlablaHighestbid: 0.0 from none",test.list());
 		
-		//letzer bieter
+		//letzer bieter die auf die auction geboten haben
 		User tuser=new User();
 		tuser.setName("user");
 		ArrayList<Auction>tauction=test.getAuction();
 		tauction.get(0).setLastUser(tuser);
 		test.setAuction(tauction);
+		assertEquals("ID: 0Description: BlablaHighestbid: 0.0 from user",test.list());
 		
-		test.list();
 	}
 
 	@Test
@@ -133,7 +151,6 @@ public class ServerTest {
 	}
 
 
-	//noch nicht fertig
 	@Test
 	public void testSetUser() {
 		// //////////////////////////
