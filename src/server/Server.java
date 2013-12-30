@@ -46,7 +46,7 @@ public class Server {
 		return "There is no Auction with this ID!";
 	}
 	////////////
-	//variablen namen geŠndert ein CreateMessage create sonst sehr verwirrend - huang
+	//variablen namen gendert ein CreateMessage create sonst sehr verwirrend - huang
 	//id und startpreis fehlt!!!!!!!!!!!!!! -huang
 	public String create(CreateMessage createM) {
 		User creater = null;
