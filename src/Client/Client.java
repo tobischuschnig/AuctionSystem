@@ -25,11 +25,7 @@ public class Client{
 		Client c=new Client();
 		c.run();
 	}
-	public void testeInput(String eingabe){
-		this.eingabe=eingabe;
-		j=true;
-		run();
-	}
+	
 	/**
 	 * Die Methode leitet die Login Daten an den Server weiter
 	 */
@@ -64,19 +60,14 @@ public class Client{
 	 * ueber entsprechende Methoden weiter
 	 */
 	public void run() {
-		//hab das boolean wert in einen variable getan um das programm sauber zu beenden
-		while(j){
-		if(eingabe.equals("")){
+		
+		while(true){
 			in=new Scanner(System.in);
 			System.out.print(">");
-			String eingabe=in.nextLine()
-					.toLowerCase();
-		}else{
-			j=false;
-		}
+			String eingabe=in.nextLine().toLowerCase();
 		
-			if(eingabe.startsWith(" ")) 
-				eingabe=eingabe.substring(1);
+			if(eingabe.startsWith(" ")) eingabe=eingabe.substring(1);
+			
 			if(eingabe.startsWith("!list")){
 				list();
 			}else if(eingabe.startsWith("!bid")){
@@ -93,11 +84,10 @@ public class Client{
 			}else if(eingabe.startsWith("!login")){
 				String[] werte=eingabe.split(" ");
 				if(werte.length==2){
-						login();//ausgebessern!!!
+						login();
 				}else{
 					System.out.println("Please enter User like:\n!login Username");
 				}
-				login();
 			}else if(eingabe.startsWith("!create")){
 				String[] werte=eingabe.split(" ");
 				if(werte.length==3){
@@ -112,10 +102,8 @@ public class Client{
 			}else if(eingabe.startsWith("!logout")){
 				logout();
 			}else if(eingabe.startsWith("!end")){
-				if(eingabe.equals("")){
-					in.close();
-				}
-				j=false;
+				in.close();
+				System.exit(0);
 			}
 			else{
 				System.out.println("Could not recognize input\nPlease try again");
