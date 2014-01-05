@@ -51,7 +51,7 @@ public class Server {
 		
 	
 	
-	
+	/**
 	public String bid(BidMessage bid) {
 		User bidder = null;
 		for(int i=0;i < user.size();i++) {
@@ -156,16 +156,11 @@ public class Server {
 		return out;
 		
 	}
-
+*/
+	
 	private void notify(Message message) {
 		//TODO die Ausgaben der Methoden mittels notify an die User weritergeben oder speichern
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	

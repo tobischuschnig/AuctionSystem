@@ -39,8 +39,8 @@ public class Testmain {
 		
 		String wert3 = server.request(login);
 		System.out.println(wert3);
-		wert3 = server.request(login);
-		System.out.println(wert3);
+//		wert3 = server.request(login); //testet das doppelt anmelden Funktionier (Fehlermeldung)
+//		System.out.println(wert3);
 		///////////////////////////
 		
 		
@@ -85,10 +85,10 @@ public class Testmain {
 		
 		String wert4 = server.request(logout);
 		System.out.println(wert4);
-		wert4 = server.request(logout);
+		wert4 = server.request(logout); //Testet das doppelt auslogen funktioniert (Fehlermeldung)
 		System.out.println(wert4);
-		wert3 = server.request(login);
-		System.out.println(wert3);
+//		wert3 = server.request(login); //Nur zum testen des erneuten logins funtkioniert
+//		System.out.println(wert3);
 		////////////////////////
 	}
 
