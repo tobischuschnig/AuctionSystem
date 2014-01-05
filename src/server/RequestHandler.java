@@ -12,13 +12,13 @@ public class RequestHandler {
 	public void execute(CreateMessage message,Server server,int wert) {
 		
 	}
-	public void execute(LoginMessage message,Server server) {
-
-	}
-	public void execute(LogoutMessage message,Server server) {
-
-	}
-	public void execute(ListMessage message,Server server) {
-
-	}
+//	public void execute(LoginMessage message,Server server) {
+//
+//	}
+//	public void execute(LogoutMessage message,Server server) {
+//
+//	}
+//	public void execute(ListMessage message,Server server) {
+//
+//	}
 }

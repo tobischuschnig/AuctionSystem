@@ -16,6 +16,16 @@ public class Auction {
 		deadline=new Date();
 		deadline.setTime(deadline.getTime()+duration*1000);
 	}
+	
+	public Auction(User owner,String description,Long duration, int id){
+		highestBid=0.0;
+		this.owner=owner;
+		this.description=description;
+		deadline=new Date();
+		deadline.setTime(deadline.getTime()+duration*1000);
+		this.id = id;
+	}
+	
 	public boolean isActive(){
 		return false;
 	}

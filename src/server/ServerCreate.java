@@ -1,7 +1,10 @@
 package server;
 
+import java.util.ArrayList;
+
 import model.Auction;
 import model.CreateMessage;
+import model.Message;
 import model.User;
 
 public class ServerCreate implements ServerAction{
@@ -12,17 +15,24 @@ public class ServerCreate implements ServerAction{
 		this.server = server;
 	}
 
-	public String create(CreateMessage create) {
+	@Override
+	public String doOperation(Message message, Server server) {
+		CreateMessage create = (CreateMessage) message;
 		User creater = null;
-		for(int i=0;i < user.size();i++) {
-			if(create.getName().equals(user.get(i).getName())) {
-				creater = user.get(i);
+		for(int i=0;i < server.getUser().size();i++) {
+			if(create.getName().equals(server.getUser().get(i).getName())) {
+				creater = server.getUser().get(i);
 			}
 		}
 		if (creater == null) {
 			return "This User doesn't exists!";
 		}
-		auction.add(new Auction(creater,create.getDesc(),""+create.getDuration()));
+		/////////////////////////////////////////////////////////////////////////
+		//		TODO hier wirklich gut geloest???
+		ArrayList<Auction> hilf = server.getAuction();
+		hilf.add(new Auction(creater, create.getDesc(),  create.getDuration() , hilf.size() ));
+		server.setAuction(hilf);
+		/////////////////////////////////////////////////////////////////////////
 		return "You have created a new auction!";	
 	}
 

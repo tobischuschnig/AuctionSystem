@@ -1,6 +1,9 @@
 package server;
 
-public class ServerList {
+import model.BidMessage;
+import model.Message;
+
+public class ServerList implements ServerAction {
 
 	private Server server;
 	
@@ -8,18 +11,21 @@ public class ServerList {
 		this.server = server;
 	}
 	
-	public String list () {
+	@Override
+	public String doOperation(Message message, Server server) {
+		BidMessage bid = (BidMessage) message;
 		String out = "";
-		for(int i=0;i< auction.size();i++) {
+		for(int i=0;i< server.getAuction().size();i++) {
 			String hilf;
-			if (auction.get(i).getLastUser() == null) {
+			if (server.getAuction().get(i).getLastUser() == null) {
 				hilf = "none";
 			}
 			else {
-				hilf=auction.get(i).getLastUser().getName();
+				hilf=server.getAuction().get(i).getLastUser().getName();
 			}
-			out+= "ID: "+ auction.get(i).getId()+ "Description: " +auction.get(i).getDescription()
-					+ "Highestbid: " + auction.get(i).getHighestBid() + " from "+hilf;
+			out+= "ID: "+ server.getAuction().get(i).getId()+ "Description: " 
+					+server.getAuction().get(i).getDescription()
+					+ "Highestbid: " + server.getAuction().get(i).getHighestBid() + " from "+hilf;
 		}
 		return out;
 		

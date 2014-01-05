@@ -3,10 +3,10 @@ package model;
 public class CreateMessage implements Message{
 	private String name;
 	private String desc;
-	private int duration;
+	private Long duration; //auf long geaendert da ueberall verwendet tobias 
 	@Override
 	public String getName() {
-		return name;//null wurde vorher zurückgeben -huang
+		return name;//null wurde vorher zurueckgeben -huang
 	}
 	/**
 	 * @return the desc
@@ -23,13 +23,13 @@ public class CreateMessage implements Message{
 	/**
 	 * @return the duration
 	 */
-	public int getDuration() {
+	public Long getDuration() {
 		return duration;
 	}
 	/**
 	 * @param duration the duration to set
 	 */
-	public void setDuration(int duration) {
+	public void setDuration(long duration) {
 		this.duration = duration;
 	}
 	/**

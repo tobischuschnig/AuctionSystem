@@ -16,23 +16,27 @@ public class Server {
 	public Server() {
 		user=new ArrayList<User>();//initizalisierung vergessen!!!! - huang
 		auction=new ArrayList<Auction>();//initizalisierung vergessen!!!! - huang
-		ahandler.run(); //TODO Thread richtig machen.
+		//ahandler.run(); //TODO Thread richtig machen.
 	}
 
-	public void request(Message message) {
+	public String request(Message message) {
+		String wert = "";
 		if(message instanceof BidMessage) {
 			ServerBid bid = new ServerBid(this);
-			String wert = bid.doOperation(message, this);
+			wert = bid.doOperation(message, this);
 			//TODO Nachricht weiterleiten via UDP
 		}
 		else if(message instanceof CreateMessage) {
 			ServerCreate create = new ServerCreate(this);
-			String wert = create.doOperation(message, this);
+			wert = create.doOperation(message, this);
 			//TODO Nachricht weiterleiten via UDP
 		}
-	
+		return wert;
 	}
 		
+	
+	
+	
 	public String bid(BidMessage bid) {
 		User bidder = null;
 		for(int i=0;i < user.size();i++) {
