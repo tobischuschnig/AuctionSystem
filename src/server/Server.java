@@ -41,6 +41,11 @@ public class Server {
 			wert = login.doOperation(message, this);
 			//TODO Nachricht weiterleiten via UDP/TCP
 		}
+		else if(message instanceof LogoutMessage) {
+			ServerLogout logout = new ServerLogout(this);
+			wert = logout.doOperation(message, this);
+			//TODO Nachricht weiterleiten via UDP/TCP
+		}
 		return wert;
 	}
 		

@@ -39,6 +39,8 @@ public class Testmain {
 		
 		String wert3 = server.request(login);
 		System.out.println(wert3);
+		wert3 = server.request(login);
+		System.out.println(wert3);
 		///////////////////////////
 		
 		
@@ -76,6 +78,18 @@ public class Testmain {
 		String wert2 = server.request(list);
 		System.out.println(wert2);
 		///////////////////////
+		
+		//auslogen mit LogoutMessage
+		LogoutMessage logout = new LogoutMessage();
+		logout.setName("name");
+		
+		String wert4 = server.request(logout);
+		System.out.println(wert4);
+		wert4 = server.request(logout);
+		System.out.println(wert4);
+		wert3 = server.request(login);
+		System.out.println(wert3);
+		////////////////////////
 	}
 
 }

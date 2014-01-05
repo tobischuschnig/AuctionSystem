@@ -40,7 +40,7 @@ public class ServerLogin implements ServerAction {
 			/////////////////////////////////////////////////////////////////////////
 			return "Succesfully suscribed and loged in as: "+loger.getName();
 		}
-		else if (loger.isActive()==false){
+		else if (loger != null && loger.isActive()==false){
 			loger.setAdresse("");
 			loger.setTcpPort(123);
 			loger.setUdpPort(123);
