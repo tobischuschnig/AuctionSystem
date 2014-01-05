@@ -45,7 +45,8 @@ public class Testmain {
 		
 		
 		//Auctionen erstellen mit CreateMessage
-		Long duration = (long) 1531235;
+		Long duration = 10L;
+		System.out.println(duration);
 		CreateMessage create = new CreateMessage();
 		create.setDesc("laptop");
 		create.setName("name");
@@ -53,6 +54,8 @@ public class Testmain {
 		/////
 		String wert1 = server.request(create);
 		System.out.println(wert1);
+		
+		System.out.println(server.getAuction().get(0).getDeadline());
 		
 		create.setDesc("Hand");
 		wert1 = server.request(create);

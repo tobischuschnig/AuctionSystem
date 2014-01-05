@@ -11,12 +11,15 @@ public class Server {
 	private ArrayList<Auction> auction;
 	private String todo;
 	private AuctionHandler ahandler;
-	private RequestHandler rhandler;
+	private RequestHandler rhandler; //TODO brauch ich eig net
 	
 	public Server() {
 		user=new ArrayList<User>();//initizalisierung vergessen!!!! - huang
 		auction=new ArrayList<Auction>();//initizalisierung vergessen!!!! - huang
-		//ahandler.run(); //TODO Thread richtig machen.
+		ahandler = new AuctionHandler(this);
+		Thread athread = new Thread();
+		athread.setPriority(Thread.MIN_PRIORITY);
+		new Thread(ahandler).start();
 	}
 
 	public String request(Message message) {

@@ -14,7 +14,8 @@ public class Auction {
 		this.owner=owner;
 		this.description=description;
 		deadline=new Date();
-		deadline.setTime(deadline.getTime()+duration*1000);
+		deadline.setTime(deadline.getTime()+duration*1000); // warum mit *1000 da kommt dann bei mir ein ende mit dem jahr 4067
+		//deadline.setTime(deadline.getTime()+duration);
 	}
 	
 	public Auction(User owner,String description,Long duration, int id){
