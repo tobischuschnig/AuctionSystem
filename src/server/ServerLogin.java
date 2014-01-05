@@ -2,9 +2,12 @@ package server;
 
 import java.util.ArrayList;
 
+import model.Auction;
+import model.LoginMessage;
+import model.Message;
 import model.User;
 
-public class ServerLogin {
+public class ServerLogin implements ServerAction {
 
 	private Server server;
 	
@@ -12,22 +15,30 @@ public class ServerLogin {
 		this.server = server;
 	}
 	
-	public String login (String name) {
+	@Override
+	public String doOperation(Message message, Server server) {
+		LoginMessage bid = (LoginMessage) message;
 		User loger = null;
-		for(int i=0;i < user.size();i++) {
-			if(name.equals(user.get(i).getName())) {
-				loger = user.get(i);
+		for(int i=0;i < server.getUser().size();i++) {
+			if(bid.getName().equals(server.getUser().get(i).getName())) {
+				loger = server.getUser().get(i);
 			}
 		}
 		if(loger == null) {
 			loger = new User();
-			loger.setName(name);
-			loger.setAdresse("");
-			loger.setTcpPort(123);
-			loger.setUdpPort(123);
+			loger.setName(bid.getName());
+			loger.setAdresse("123"); //TODO was soll ich ihm als Adresse setzen
+			loger.setTcpPort(123); //TODO Port?
+			loger.setUdpPort(123); //TODO Port?
 			loger.setActive(true);
 			loger.setMessages(new ArrayList<String>());
-			return "Succesfully loged in as: "+loger.getName();
+			/////////////////////////////////////////////////////////////////////////
+			//TODO hier wirklich gut geloest???
+			ArrayList<User> hilf = server.getUser();
+			hilf.add(loger);
+			server.setUser(hilf);
+			/////////////////////////////////////////////////////////////////////////
+			return "Succesfully suscribed and loged in as: "+loger.getName();
 		}
 		else if (loger.isActive()==false){
 			loger.setAdresse("");

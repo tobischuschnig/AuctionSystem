@@ -12,12 +12,12 @@ public class Testmain {
 	 */
 	public static void main(String[] args) {
 		//User erstellen
-		User user = new User();
-		user.setActive(true);
-		user.setAdresse("123");
-		user.setName("name");
-		ArrayList<User> users = new ArrayList();
-		users.add(user);
+//		User user = new User();
+//		user.setActive(true);
+//		user.setAdresse("123");
+//		user.setName("name");
+//		ArrayList<User> users = new ArrayList();
+//		users.add(user);
 		////////////////////////////
 		
 		
@@ -30,8 +30,17 @@ public class Testmain {
 		//Server erstellen
 		Server server = new Server();
 //		server.setAuction(auctions);
-		server.setUser(users);
+//		server.setUser(users);
 		///////////////////////
+		
+		//User erstellen mit LoginMessage
+		LoginMessage login = new LoginMessage();
+		login.setName("name");
+		
+		String wert3 = server.request(login);
+		System.out.println(wert3);
+		///////////////////////////
+		
 		
 		//Auctionen erstellen mit CreateMessage
 		Long duration = (long) 1531235;
@@ -60,7 +69,13 @@ public class Testmain {
 		System.out.println(wert);
 		///////////////////////
 		
+		//Auflisten mit ListMessage
+		ListMessage list = new ListMessage();
+		list.setName("name");
 		
+		String wert2 = server.request(list);
+		System.out.println(wert2);
+		///////////////////////
 	}
 
 }

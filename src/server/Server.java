@@ -24,12 +24,22 @@ public class Server {
 		if(message instanceof BidMessage) {
 			ServerBid bid = new ServerBid(this);
 			wert = bid.doOperation(message, this);
-			//TODO Nachricht weiterleiten via UDP
+			//TODO Nachricht weiterleiten via UDP/TCP
 		}
 		else if(message instanceof CreateMessage) {
 			ServerCreate create = new ServerCreate(this);
 			wert = create.doOperation(message, this);
-			//TODO Nachricht weiterleiten via UDP
+			//TODO Nachricht weiterleiten via UDP/TCP
+		}
+		else if(message instanceof ListMessage) {
+			ServerList list = new ServerList(this);
+			wert = list.doOperation(message, this);
+			//TODO Nachricht weiterleiten via UDP/TCP
+		}
+		else if(message instanceof LoginMessage) {
+			ServerLogin login = new ServerLogin(this);
+			wert = login.doOperation(message, this);
+			//TODO Nachricht weiterleiten via UDP/TCP
 		}
 		return wert;
 	}
