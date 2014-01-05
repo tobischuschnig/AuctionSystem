@@ -4,7 +4,7 @@ import model.Auction;
 import model.CreateMessage;
 import model.User;
 
-public class ServerCreate {
+public class ServerCreate implements ServerAction{
 
 	private Server server;
 	

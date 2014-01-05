@@ -11,14 +11,28 @@ public class Server {
 	private ArrayList<Auction> auction;
 	private String todo;
 	private AuctionHandler ahandler;
+	private RequestHandler rhandler;
 	
 	public Server() {
 		user=new ArrayList<User>();//initizalisierung vergessen!!!! - huang
 		auction=new ArrayList<Auction>();//initizalisierung vergessen!!!! - huang
+		ahandler.run(); //TODO Thread richtig machen.
 	}
-	
-	
 
+	public void request(Message message) {
+		if(message instanceof BidMessage) {
+			ServerBid bid = new ServerBid(this);
+			String wert = bid.doOperation(message, this);
+			//TODO Nachricht weiterleiten via UDP
+		}
+		else if(message instanceof CreateMessage) {
+			ServerCreate create = new ServerCreate(this);
+			String wert = create.doOperation(message, this);
+			//TODO Nachricht weiterleiten via UDP
+		}
+	
+	}
+		
 	public String bid(BidMessage bid) {
 		User bidder = null;
 		for(int i=0;i < user.size();i++) {
@@ -127,6 +141,13 @@ public class Server {
 	private void notify(Message message) {
 		//TODO die Ausgaben der Methoden mittels notify an die User weritergeben oder speichern
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/**
