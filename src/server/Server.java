@@ -6,16 +6,26 @@ import connect.UDPNotifier;
 
 import model.*;
 
+/**
+ * Der Server mit allen Funktionalitaeten sowie den Daten der User.
+ * Hat eine request Methode auf der alle Anfragen angenommen werdne und weitergeleitet werden
+ * @author Tobias
+ * @version 2013-01-05
+ */
 public class Server {
 
 	private int tcpPort;
 	private ArrayList<User> user;
 	private ArrayList<Auction> auction;
-	private String todo;
+	private String todo; //TODO brauch ich nicht mehr
 	private AuctionHandler ahandler;
-	private RequestHandler rhandler; //TODO brauch ich eig net
+	private RequestHandler rhandler; 
 	private UDPNotifier udp;
 	
+	/**
+	 * Der Standartkonstruktor hier werden alle Attribute die spaeter verwendet werden
+	 * initialisiert.
+	 */
 	public Server() {
 		user=new ArrayList<User>();
 		auction=new ArrayList<Auction>();
@@ -26,14 +36,28 @@ public class Server {
 		new Thread(ahandler).start();
 	}
 
+	/**
+	 * Hier werden alle Anfragen angenommen und an den RequestHandler weitergegeben
+	 * @param message die Message die alle Parameter beinhaltet und was gemacht werden soll
+	 * @return das Ergebniss der Operation das via TCP an den Client weitergegeben werden soll
+	 */
 	public String request(Message message) {
 		return rhandler.execute(message, this);
 	}
 	
+	/**
+	 * Hier wird die notify Methode des UDPNotifiers aufgerufen der die Nachricht via
+	 * UDP an die entsprechenden Clients schickt
+	 * @param al die betroffenen User die die Message erhalten sollen
+	 * @param message was geschickt werden soll
+	 */
 	public void notify(ArrayList<User> al, String message) {
 		//udp.notify(al,message);
-		System.out.println(message); //TODO nach tests entfernen
+		System.out.println(message); //TODO nach tests entfernen und wechseln
 	}
+	
+	
+	
 	
 	/**
 	 * @return the tcpPort
