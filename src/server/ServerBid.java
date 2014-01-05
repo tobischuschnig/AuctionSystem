@@ -9,12 +9,6 @@ import model.User;
 
 public class ServerBid implements ServerAction {
 	
-	private Server server;
-	
-	public ServerBid(Server server) {
-		this.server = server;
-	}
-	
 	@Override
 	public String doOperation(Message message, Server server) {
 		BidMessage bid = (BidMessage) message;
@@ -31,13 +25,21 @@ public class ServerBid implements ServerAction {
 		for(int i=0;i< server.getAuction().size();i++) {
 			if(bid.getId() == server.getAuction().get(i).getId()) {
 				if(server.getAuction().get(i).getHighestBid() < bid.getAmount()) {
-					/////////////////////////////////////////////////////////////////////////
-					//TODO hier wirklich gut geloest???
-					ArrayList<Auction> hilf = server.getAuction();
-					hilf.get(i).setHighestBid(bid.getAmount());
-					hilf.get(i).setLastUser(bidder);
-					server.setAuction(hilf);
-					/////////////////////////////////////////////////////////////////////////
+					User lastUser;
+					Auction hilf = server.getAuction().get(i);
+					hilf.setHighestBid(bid.getAmount());
+					lastUser = server.getAuction().get(i).getLastUser();
+					hilf.setLastUser(bidder);
+					server.getAuction().set(i,hilf);
+					
+					if (lastUser != null) {
+						ArrayList<User> al = new ArrayList();
+						al.add(lastUser);
+						server.notify(al,"You have been overbid on '" +
+							server.getAuction().get(i).getDescription()+"' with the ID: "+
+							server.getAuction().get(i).getId()+".");
+					}
+					
 					return "You successfully bid with "+bid.getAmount()+" on '"
 						+server.getAuction().get(i).getDescription()+"'.";
 				}

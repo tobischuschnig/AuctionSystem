@@ -2,6 +2,8 @@ package server;
 
 import java.util.ArrayList;
 
+import connect.UDPNotifier;
+
 import model.*;
 
 public class Server {
@@ -12,160 +14,26 @@ public class Server {
 	private String todo;
 	private AuctionHandler ahandler;
 	private RequestHandler rhandler; //TODO brauch ich eig net
+	private UDPNotifier udp;
 	
 	public Server() {
-		user=new ArrayList<User>();//initizalisierung vergessen!!!! - huang
-		auction=new ArrayList<Auction>();//initizalisierung vergessen!!!! - huang
+		user=new ArrayList<User>();
+		auction=new ArrayList<Auction>();
 		ahandler = new AuctionHandler(this);
+		rhandler = new RequestHandler();
 		Thread athread = new Thread();
 		athread.setPriority(Thread.MIN_PRIORITY);
 		new Thread(ahandler).start();
 	}
 
 	public String request(Message message) {
-		String wert = "";
-		if(message instanceof BidMessage) {
-			ServerBid bid = new ServerBid(this);
-			wert = bid.doOperation(message, this);
-			//TODO Nachricht weiterleiten via UDP/TCP
-		}
-		else if(message instanceof CreateMessage) {
-			ServerCreate create = new ServerCreate(this);
-			wert = create.doOperation(message, this);
-			//TODO Nachricht weiterleiten via UDP/TCP
-		}
-		else if(message instanceof ListMessage) {
-			ServerList list = new ServerList(this);
-			wert = list.doOperation(message, this);
-			//TODO Nachricht weiterleiten via UDP/TCP
-		}
-		else if(message instanceof LoginMessage) {
-			ServerLogin login = new ServerLogin(this);
-			wert = login.doOperation(message, this);
-			//TODO Nachricht weiterleiten via UDP/TCP
-		}
-		else if(message instanceof LogoutMessage) {
-			ServerLogout logout = new ServerLogout(this);
-			wert = logout.doOperation(message, this);
-			//TODO Nachricht weiterleiten via UDP/TCP
-		}
-		return wert;
-	}
-		
-	
-	
-	/**
-	public String bid(BidMessage bid) {
-		User bidder = null;
-		for(int i=0;i < user.size();i++) {
-			if(bid.getName().equals(user.get(i).getName())) {
-				bidder = user.get(i);
-			}
-		}
-		if (bidder == null) {
-			return "This User doesn't exists!";
-		}
-		
-		for(int i=0;i< auction.size();i++) {
-			if(bid.getId() == auction.get(i).getId()) {
-				if(auction.get(i).getHighestBid() < bid.getAmount()) {
-					auction.get(i).setHighestBid(bid.getAmount());
-					auction.get(i).setLastUser(bidder);
-					return "You successfully bid with "+bid.getAmount()+" on '"
-						+auction.get(i).getDescription()+"'.";
-				}
-				else {
-					return "Your bid must be higher then the current bid! The current bid ist: "+auction.get(i).getHighestBid();
-				}
-			}
-		}
-		return "There is no Auction with this ID!";
-	}
-	////////////
-	//variablen namen gendert ein CreateMessage create sonst sehr verwirrend - huang
-	//id und startpreis fehlt!!!!!!!!!!!!!! -huang
-	public String create(CreateMessage createM) {
-		User creater = null;
-		for(int i=0;i < user.size();i++) {
-			if(createM.getName().equals(user.get(i).getName())) {
-				creater = user.get(i);
-			}
-		}
-		if (creater == null) {
-			return "This User doesn't exists!";
-		}
-		auction.add(new Auction(creater,createM.getDesc(),(long)createM.getDuration()));//casten vergessen- huang
-		return "You have created a new auction!";	
+		return rhandler.execute(message, this);
 	}
 	
-	public String login (String name) {
-		User loger = null;
-		for(int i=0;i < user.size();i++) {
-			if(name.equals(user.get(i).getName())) {
-				loger = user.get(i);
-			}
-		}
-		
-		if(loger == null) {
-			loger = new User();
-			loger.setName(name);
-			loger.setAdresse("");
-			loger.setTcpPort(123);
-			loger.setUdpPort(123);
-			loger.setActive(true);
-			loger.setMessages(new ArrayList<String>());
-			user.add(loger);//user in die arraylist eintragen vergessen hab ich ausgebessert-huang
-			return "Succesfully loged in as: "+loger.getName();
-		}
-		else if (loger.isActive()==false){
-			loger.setAdresse("");
-			loger.setTcpPort(123);
-			loger.setUdpPort(123);
-			loger.setActive(true);
-			return "Succesfully loged in as: "+loger.getName();
-		}
-		return "You are allready loged in please log out first!";
-		
+	public void notify(ArrayList<User> al, String message) {
+		//udp.notify(al,message);
+		System.out.println(message); //TODO nach tests entfernen
 	}
-	
-	public String logout(String name) {
-		User loger = null;
-		for(int i=0;i < user.size();i++) {
-			if(name.equals(user.get(i).getName())) {
-				loger = user.get(i);
-			}
-		}
-		if (loger != null) {
-			loger.setActive(false);
-			//TODO schliessen der Verbindungen
-			return "Succesfully loged out as: "+loger.getName();
-		}
-		return "Error you must log in first!";
-	}
-	
-	public String list () {
-		String out = "";
-		for(int i=0;i< auction.size();i++) {
-			String hilf;
-			if (auction.get(i).getLastUser() == null) {
-				hilf = "none";
-			}
-			else {
-				hilf=auction.get(i).getLastUser().getName();
-			}
-			out+= "ID: "+ auction.get(i).getId()+ "Description: " +auction.get(i).getDescription()
-					+ "Highestbid: " + auction.get(i).getHighestBid() + " from "+hilf;
-		}
-		return out;
-		
-	}
-*/
-	
-	private void notify(Message message) {
-		//TODO die Ausgaben der Methoden mittels notify an die User weritergeben oder speichern
-	}
-	
-	
 	
 	/**
 	 * @return the tcpPort

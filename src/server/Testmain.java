@@ -39,14 +39,14 @@ public class Testmain {
 		
 		String wert3 = server.request(login);
 		System.out.println(wert3);
-//		wert3 = server.request(login); //testet das doppelt anmelden Funktionier (Fehlermeldung)
-//		System.out.println(wert3);
+		wert3 = server.request(login); //testet das doppelt anmelden Funktionier (Fehlermeldung)
+		System.out.println(wert3);
 		///////////////////////////
 		
 		
 		//Auctionen erstellen mit CreateMessage
 		Long duration = 10L;
-		System.out.println(duration);
+//		System.out.println(duration);
 		CreateMessage create = new CreateMessage();
 		create.setDesc("laptop");
 		create.setName("name");
@@ -55,7 +55,7 @@ public class Testmain {
 		String wert1 = server.request(create);
 		System.out.println(wert1);
 		
-		System.out.println(server.getAuction().get(0).getDeadline());
+		//System.out.println(server.getAuction().get(0).getDeadline());
 		
 		create.setDesc("Hand");
 		wert1 = server.request(create);
@@ -71,6 +71,10 @@ public class Testmain {
 		///
 
 		String wert = server.request(bid);
+		System.out.println(wert);
+		
+		bid.setAmount(200.20);
+		wert = server.request(bid);
 		System.out.println(wert);
 		///////////////////////
 		
@@ -90,8 +94,8 @@ public class Testmain {
 		System.out.println(wert4);
 		wert4 = server.request(logout); //Testet das doppelt auslogen funktioniert (Fehlermeldung)
 		System.out.println(wert4);
-//		wert3 = server.request(login); //Nur zum testen des erneuten logins funtkioniert
-//		System.out.println(wert3);
+		wert3 = server.request(login); //Nur zum testen des erneuten logins funtkioniert
+		System.out.println(wert3);
 		////////////////////////
 	}
 

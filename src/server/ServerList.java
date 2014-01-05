@@ -4,12 +4,6 @@ import model.ListMessage;
 import model.Message;
 
 public class ServerList implements ServerAction {
-
-	private Server server;
-	
-	public ServerList(Server server) {
-		this.server = server;
-	}
 	
 	@Override
 	public String doOperation(Message message, Server server) {

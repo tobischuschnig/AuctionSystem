@@ -8,12 +8,6 @@ import model.Message;
 import model.User;
 
 public class ServerLogin implements ServerAction {
-
-	private Server server;
-	
-	public ServerLogin(Server server) {
-		this.server = server;
-	}
 	
 	@Override
 	public String doOperation(Message message, Server server) {
@@ -27,27 +21,22 @@ public class ServerLogin implements ServerAction {
 		if(loger == null) {
 			loger = new User();
 			loger.setName(bid.getName());
-			loger.setAdresse("123"); //TODO was soll ich ihm als Adresse setzen
+			loger.setAdresse("123"); //TODO aus LoginMessage hohlen
 			loger.setTcpPort(123); //TODO Port?
 			loger.setUdpPort(123); //TODO Port?
 			loger.setActive(true);
 			loger.setMessages(new ArrayList<String>());
-			/////////////////////////////////////////////////////////////////////////
-			//TODO hier wirklich gut geloest???
-			ArrayList<User> hilf = server.getUser();
-			hilf.add(loger);
-			server.setUser(hilf);
-			/////////////////////////////////////////////////////////////////////////
+			server.getUser().add(loger);
 			return "Succesfully suscribed and loged in as: "+loger.getName();
 		}
 		else if (loger != null && loger.isActive()==false){
-			loger.setAdresse("");
+			loger.setAdresse(""); //TODO aus LoginMessage hohlen
 			loger.setTcpPort(123);
 			loger.setUdpPort(123);
 			loger.setActive(true);
 			return "Succesfully loged in as: "+loger.getName();
 		}
-		return "You are allready loged in please log out first!";
+		return "This User is allready loged in please log out first!";
 		
 	}
 }

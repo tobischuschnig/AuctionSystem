@@ -8,12 +8,6 @@ import model.User;
 
 public class ServerLogout implements ServerAction{
 
-	private Server server;
-	
-	public ServerLogout(Server server) {
-		this.server = server;
-	}
-	
 	@Override
 	public String doOperation(Message message, Server server) {
 		LogoutMessage logout = (LogoutMessage) message;
@@ -29,17 +23,9 @@ public class ServerLogout implements ServerAction{
 			return "This User doesn't exists!";
 		}
 		else if (loger != null && server.getUser().get(ii).isActive() == true) {
-			//loger.setActive(false);
-			
-			/////////////////////////////////////////////////////////////////////////
-			//TODO hier wirklich gut geloest???
-			ArrayList<User> hilf = server.getUser();
-			hilf.get(ii).setActive(false);
-			server.setUser(hilf);
-			/////////////////////////////////////////////////////////////////////////
-			
-			//TODO schliessen der Verbindungen
-			return "Succesfully loged out as: "+loger.getName()+server.getUser().get(ii).isActive();
+			server.getUser().get(ii).setActive(false);			
+			//TODO schliessen der Verbindungen?
+			return "Succesfully loged out as: "+loger.getName();
 		}
 		return "Error you must log in first!";
 	}

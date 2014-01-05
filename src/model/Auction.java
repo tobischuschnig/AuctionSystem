@@ -8,14 +8,15 @@ public class Auction {
 	private User lastUser,owner;
 	private String description;
 	private Date deadline;
+	private boolean finished;
 	
 	public Auction(User owner,String description,Long duration){
 		highestBid=0.0;
 		this.owner=owner;
 		this.description=description;
 		deadline=new Date();
-		deadline.setTime(deadline.getTime()+duration*1000); // warum mit *1000 da kommt dann bei mir ein ende mit dem jahr 4067
-		//deadline.setTime(deadline.getTime()+duration);
+		deadline.setTime(deadline.getTime()+duration*1000);
+		finished = false;
 	}
 	
 	public Auction(User owner,String description,Long duration, int id){
@@ -25,6 +26,7 @@ public class Auction {
 		deadline=new Date();
 		deadline.setTime(deadline.getTime()+duration*1000);
 		this.id = id;
+		finished = false;
 	}
 	
 	public boolean isActive(){
@@ -105,5 +107,18 @@ public class Auction {
 	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
-	
+
+	/**
+	 * @return the finished
+	 */
+	public boolean isFinished() {
+		return finished;
+	}
+
+	/**
+	 * @param finished the finished to set
+	 */
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
 }
