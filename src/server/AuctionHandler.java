@@ -35,7 +35,7 @@ public class AuctionHandler implements Runnable {
 			for(int i=0;i< server.getAuction().size();i++) { //Alle Autkionen durchgehen
 				//Schauen ob sie abgelaufen ist
 				if(server.getAuction().get(i).getDeadline().compareTo(now) <= 0 && 
-						server.getAuction().get(i).isFinished() == false) { 
+						server.getAuction().get(i).isFinished() == false) { //TODO Fehler Zeile 37 NullPointer Exception
 					server.getAuction().get(i).setFinished(true);
 					//System.out.println(server.getAuction().get(i).getDescription()+ " is over.");
 
