@@ -40,14 +40,16 @@ public class ReceiveConnection implements Runnable{
 			e.printStackTrace();
 		}
 		while(listen){
+			System.out.println("Ready to Listen");
 			Socket client = null;
 			try {
 				client = ss.accept();
+				client.setKeepAlive(true);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			new UserHandler(client);
+			new UserHandler(client, server);
 		}
 		try {
 			ss.close();

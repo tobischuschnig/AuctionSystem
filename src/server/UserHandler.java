@@ -32,19 +32,23 @@ public class UserHandler implements Runnable{
 	/**
 	 * 
 	 */
-	public UserHandler(Socket c){
+	public UserHandler(Socket c,Server s){
 		client = c;
+		server = s;
 		tcpPort = c.getPort();
 		host = c.getInetAddress().toString();
-		executor = new Thread();
+		executor = new Thread(this);
 		executor.start();
 	}
 	@Override
 	public void run() {
+		
+		System.out.println("new input");
 		ObjectInputStream in = null;
 		try {
 			in = new ObjectInputStream( client.getInputStream());
-			OutputStream out = client.getOutputStream();
+		
+			System.out.println(in.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,9 +58,13 @@ public class UserHandler implements Runnable{
 		while(active){
 			Object o = null;
 			try {
+				
 				o = in.readObject();
+				System.out.println("Get objekt");
+				m = (Message) o;
+				System.out.println(m.toString());
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
+				// TODO Auto-generatedcatch block
 				e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -65,6 +73,7 @@ public class UserHandler implements Runnable{
 			if(o instanceof Message){
 				m = (Message) o;
 				System.out.println("Sucessfully cast");
+				System.out.println(m.getName());
 			}
 		}
 		try {
