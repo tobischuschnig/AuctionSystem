@@ -31,6 +31,7 @@ public class Server {
 		auction=new ArrayList<Auction>();
 		ahandler = new AuctionHandler(this);
 		rhandler = new RequestHandler();
+		udp = new UDPNotifier();
 		Thread athread = new Thread();
 		athread.setPriority(Thread.MIN_PRIORITY);
 		new Thread(ahandler).start();
@@ -52,7 +53,7 @@ public class Server {
 	 * @param message was geschickt werden soll
 	 */
 	public void notify(ArrayList<User> al, String message) {
-		//udp.notify(al,message);
+		udp.notify(al,message);
 		System.out.println(message); //TODO nach tests entfernen und wechseln
 	}
 	
