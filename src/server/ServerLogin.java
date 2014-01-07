@@ -34,18 +34,18 @@ public class ServerLogin implements ServerAction {
 		if(loger == null) { // Wenn nicht vorhanden anlegen
 			loger = new User();
 			loger.setName(bid.getName());
-			loger.setAdresse("123"); //TODO aus LoginMessage hohlen
-			loger.setTcpPort(123); //TODO Port?
-			loger.setUdpPort(123); //TODO Port?
+			loger.setAdresse(bid.getAdresse()); 
+			loger.setTcpPort(bid.getTcpPort()); 
+			loger.setUdpPort(bid.getUdpPort()); 
 			loger.setActive(true);
 			loger.setMessages(new ArrayList<String>());
 			server.getUser().add(loger);
 			return "Succesfully suscribed and loged in as: "+loger.getName();
 		}
 		else if (loger != null && loger.isActive()==false){ //sonst active setzen 
-			loger.setAdresse(""); //TODO aus LoginMessage hohlen
-			loger.setTcpPort(123);
-			loger.setUdpPort(123);
+			loger.setAdresse(bid.getAdresse()); 
+			loger.setTcpPort(bid.getTcpPort()); 
+			loger.setUdpPort(bid.getUdpPort()); 
 			loger.setActive(true);
 			return "Succesfully loged in as: "+loger.getName();
 		}
