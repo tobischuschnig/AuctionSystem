@@ -17,9 +17,9 @@ import model.User;
  * @author Daniel Reichmann
  * @version 10-12-2013
  */
-public class UDPNotifier {
+public class UDPNotifier implements Notifier{
 	
-	public static void notify(ArrayList<User> al, String message){
+	public void notify(ArrayList<User> al, String message){
 		DatagramSocket ds;
 		byte[] buf = message.getBytes();
 		DatagramPacket dp = new DatagramPacket(buf, buf.length);
