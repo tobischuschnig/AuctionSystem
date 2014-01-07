@@ -34,6 +34,9 @@ public class Testmain {
 		//User erstellen mit LoginMessage
 		LoginMessage login = new LoginMessage();
 		login.setName("name");
+		login.setAdresse("123");
+		login.setTcpPort(123);
+		login.setUdpPort(123);
 		
 		String wert3 = server.request(login);
 		System.out.println(wert3);

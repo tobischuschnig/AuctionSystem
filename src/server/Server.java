@@ -53,7 +53,7 @@ public class Server {
 	 * @param message was geschickt werden soll
 	 */
 	public void notify(ArrayList<User> al, String message) {
-		udp.notify(al,message);
+//		udp.notify(al,message);
 		System.out.println(message); //TODO nach tests entfernen und wechseln
 	}
 	
