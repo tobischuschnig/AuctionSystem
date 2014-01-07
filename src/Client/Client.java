@@ -1,6 +1,5 @@
 package Client;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -13,13 +12,13 @@ public class Client{
 	boolean loggedIn;
 	String host;
 	int tcpPort,udpPort;
-	boolean j=true;
 	String eingabe;
 	Scanner in;
 	
 	
 	public Client(){
 		eingabe="";
+		loggedIn=false;
 	}
 	public static void main(String[] args) {
 		Client c=new Client();
@@ -31,12 +30,19 @@ public class Client{
 	 */
 	public void login(){
 		System.out.println("Login");
+		if(loggedIn==false){
+				//Login-Methode aufrufen
+			loggedIn=true;
+		}else{
+			System.out.println("Already logged in, please logout first!");
+		}
 	}
 	/**
 	 * Die Methode holt eine Liste mit allen Auktionen vom Server
 	 */
 	public void list(){
 		System.out.println("LISTE");
+		//List-Methode aufrufen
 	}
 	/**
 	 * Die Methode leitet das Gebot an den Server weiter
@@ -45,15 +51,22 @@ public class Client{
 	 */
 	public void bid(int id,double amount){
 		System.out.println("BID");
+		//Bid-Methode aufrufen
 	}
 	public void create(Long duration,String description){
 		System.out.println("CREATE");
+		//Create-Methode aufrufen
 	}
 	/**
 	 * Loggt den Benutzer aus
 	 */
 	public void logout(){
-		System.out.println("Logout");
+		if(loggedIn==true){
+				//Logout-Methode aufrufen
+			loggedIn=false;
+		}else{
+			System.out.println("Logout not possible, not logged in!");
+		}	
 	}
 	/**
 	 * Holt dauernd die Eingabe des Users und leitet sie an den Server
