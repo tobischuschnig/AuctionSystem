@@ -10,8 +10,9 @@ import java.util.Scanner;
 public class Client{
 	String username;
 	boolean loggedIn;
-	String host;
-	int tcpPort,udpPort;
+	static String host;
+	static int tcpPort;
+	static int udpPort;
 	String eingabe;
 	Scanner in;
 	
@@ -21,8 +22,17 @@ public class Client{
 		loggedIn=false;
 	}
 	public static void main(String[] args) {
+		try{
+		host=args[0];
+		tcpPort=Integer.parseInt(args[1]);
+		udpPort=Integer.parseInt(args[2]);
 		Client c=new Client();
 		c.run();
+		}catch(NumberFormatException e){
+			System.out.println("Port(s) is/are not numeric");
+		}catch(Exception e){
+			System.out.println("Could not establish connection");
+		}
 	}
 	
 	/**
