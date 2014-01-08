@@ -23,6 +23,7 @@ public class Client{
 		eingabe="";
 		loggedIn=false;
 		t=new TaskExecuter();
+		username="";
 	}
 	public static void main(String[] args) {
 		try{
@@ -47,8 +48,8 @@ public class Client{
 		
 		while(true){
 			in=new Scanner(System.in);
-			System.out.print(">");
-			String eingabe=in.nextLine();	//The current command saved as String
+			System.out.print(username+">");
+			eingabe=in.nextLine();	//The current command saved as String
 			
 			if(eingabe.startsWith(" ")) eingabe=eingabe.substring(1);
 			//If first char of command string is empty, it will be deleted
@@ -76,12 +77,17 @@ public class Client{
 				//If command is login
 			}else if(eingabe.startsWith("!login")){
 				String[] werte=original.split(" ");		//Original is used
-				if(werte.length==2){
+				if(loggedIn==false){
+					if(werte.length==2){
 						t.login(werte[1]);
-				}else{
+						username=werte[1];
+						loggedIn=true;
+					}else{
 					System.out.println("Please enter User like:\n!login Username");
+					}
+				}else{
+					System.out.println("Already logged in, logout first!");
 				}
-				
 				//If command is create
 			}else if(eingabe.startsWith("!create")){
 				String[] werte=original.split(" ");		//Original is used
@@ -105,6 +111,7 @@ public class Client{
 				if(loggedIn==true){
 					t.logout();
 					loggedIn=false;
+					username="";
 				}else{
 					System.out.println("Logout not possible, not logged in!");
 				}
