@@ -63,17 +63,20 @@ public class Client{
 				
 				//If command is bid
 			}else if(eingabe.startsWith("!bid")){
-				String[] werte=eingabe.split(" ");
-				if(werte.length==3){
-					try{
-						t.bid(Integer.parseInt(werte[1]),Double.parseDouble(werte[2]));
-					}catch(NumberFormatException e){
-						System.out.println("ID or Amount entered incorrect");
+				if(loggedIn==true){
+					String[] werte=eingabe.split(" ");
+					if(werte.length==3){
+						try{
+							t.bid(Integer.parseInt(werte[1]),Double.parseDouble(werte[2]));
+						}catch(NumberFormatException e){
+							System.out.println("ID or Amount entered incorrect");
+						}
+					}else{
+						System.out.println("Please enter ID and Amount like:\n!bid ID Amount");
 					}
 				}else{
-					System.out.println("Please enter ID and Amount like:\n!bid ID Amount");
+					System.out.println("Currently not logged in\nPlease login first");
 				}
-				
 				//If command is login
 			}else if(eingabe.startsWith("!login")){
 				String[] werte=original.split(" ");		//Original is used
@@ -90,12 +93,16 @@ public class Client{
 				}
 				//If command is create
 			}else if(eingabe.startsWith("!create")){
+				if(loggedIn==true){
 				String[] werte=original.split(" ");		//Original is used
 				String desc="";
 				for(int i=2;i<=werte.length-1;i++){
 					desc=desc+" "+werte[i];
 				}
 				t.create(Long.parseLong(werte[1]),desc);
+				}else{
+					System.out.println("Currently not logged in\nPlease login first");
+				}
 //				if(werte.length==3){
 //					try{
 //					t.create(Long.parseLong(werte[1]),werte[2]);
