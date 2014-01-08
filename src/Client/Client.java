@@ -3,7 +3,8 @@ package Client;
 import java.util.Scanner;
 
 /**
- * Repraesentiert den Client
+ * This class handles the client input and transfers the commands to the server
+ * 
  * @author Dominik Valka
  * @version 2013-12-10
  */
@@ -33,7 +34,7 @@ public class Client{
 		}catch(NumberFormatException e){
 			System.out.println("Port(s) is/are not numeric");
 		}catch(Exception e){
-			System.out.println("Could not establish connection");
+			e.printStackTrace();
 		}
 	}
 	
@@ -47,10 +48,13 @@ public class Client{
 		while(true){
 			in=new Scanner(System.in);
 			System.out.print(">");
-			String eingabe=in.nextLine().toLowerCase();	//The current command saved as String
-		
+			String eingabe=in.nextLine();	//The current command saved as String
+			
 			if(eingabe.startsWith(" ")) eingabe=eingabe.substring(1);
-				//If first char of command string is empty, it will be deleted
+			//If first char of command string is empty, it will be deleted
+			
+			String original=eingabe;	//Copy of Command, with original Format, lower/upper Case
+			eingabe=eingabe.toLowerCase(); 	//To make any lower/upper case writing possible
 			
 				//If command is list
 			if(eingabe.startsWith("!list")){
@@ -71,7 +75,7 @@ public class Client{
 				
 				//If command is login
 			}else if(eingabe.startsWith("!login")){
-				String[] werte=eingabe.split(" ");
+				String[] werte=original.split(" ");		//Original is used
 				if(werte.length==2){
 						t.login(werte[1]);
 				}else{
@@ -80,16 +84,21 @@ public class Client{
 				
 				//If command is create
 			}else if(eingabe.startsWith("!create")){
-				String[] werte=eingabe.split(" ");
-				if(werte.length==3){
-					try{
-					t.create(Long.parseLong(werte[1]),werte[2]);
-					}catch(NumberFormatException e){
-						System.out.println("Duration was entered incorrect, not a number!");
-					}
-				}else{
-				System.out.println("Please enter Create like:\n!create duration description");
-			}
+				String[] werte=original.split(" ");		//Original is used
+				String desc="";
+				for(int i=2;i<=werte.length-1;i++){
+					desc=desc+" "+werte[i];
+				}
+				t.create(Long.parseLong(werte[1]),desc);
+//				if(werte.length==3){
+//					try{
+//					t.create(Long.parseLong(werte[1]),werte[2]);
+//					}catch(NumberFormatException e){
+//						System.out.println("Duration was entered incorrect, not a number!");
+//					}
+//				}else{
+//				System.out.println("Please enter Create like:\n!create duration description");
+//			}
 				
 				//If command is logout
 			}else if(eingabe.startsWith("!logout")){
