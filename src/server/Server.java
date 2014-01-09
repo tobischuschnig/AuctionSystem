@@ -23,7 +23,7 @@ public class Server {
 	private UDPNotifier udp;
 	
 	/**
-	 * Der Standartkonstruktor hier werden alle Attribute die spaeter verwendet werden
+	 * Der Standardkonstruktor hier werden alle Attribute die spaeter verwendet werden
 	 * initialisiert.
 	 */
 	public Server() {

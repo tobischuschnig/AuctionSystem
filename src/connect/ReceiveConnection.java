@@ -44,7 +44,7 @@ public class ReceiveConnection implements Runnable{
 			Socket client = null;
 			try {
 				client = ss.accept();
-				client.setKeepAlive(true);
+								
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
