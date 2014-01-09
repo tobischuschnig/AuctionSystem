@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 
 import model.Message;
 import model.User;
@@ -29,7 +31,7 @@ public class UserHandler implements Runnable{
 	private Socket client; //Socket-Verbindung mit Client
 	private boolean active = true;
 	ObjectInputStream in;
-	ObjectOutputStream out;
+	PrintWriter out;
 	private Thread executor; //Fuerht die Aktionen durch.
 	/**
 	 * 
@@ -40,7 +42,7 @@ public class UserHandler implements Runnable{
 		tcpPort = c.getPort();
 		try {
 			in = new ObjectInputStream( client.getInputStream());
-			out = new ObjectOutputStream(client.getOutputStream());
+			out = new PrintWriter(client.getOutputStream(),true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,18 +53,8 @@ public class UserHandler implements Runnable{
 	}
 	@Override
 	public void run() {
-		System.out.println(client.toString());
 		System.out.println("new input");
-		
-//		try {
-//			
-//		
-			System.out.println(in.toString());
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} //Decorator
-		
+				
 		Message m;
 		while(active){
 			Object o = null;
@@ -72,25 +64,24 @@ public class UserHandler implements Runnable{
 				System.out.println("Get object");
 				m = (Message) o;
 //				System.out.println(m.toString());
-			} catch (ClassNotFoundException e) {
+			} catch(SocketException e){
+				System.out.println("Connection to Client lost.");
+				break;
+			}
+			catch (ClassNotFoundException e) {
 				// TODO Auto-generatedcatch block
 				e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			if(o instanceof Message){
 				m = (Message) o;
-				System.out.println("Sucessfully cast");
+
 				System.out.println(m.getName());
-				try {
-					out.writeChars("Got it");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				out.println("Got it");
 			}
-			System.out.println("fin");
 		}
 		try {
 			client.close();
