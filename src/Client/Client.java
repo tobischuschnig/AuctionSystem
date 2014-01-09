@@ -48,7 +48,7 @@ public class Client{
 		
 		while(true){
 			in=new Scanner(System.in);
-			System.out.print(username+">");
+			System.out.print(username+"> ");
 			eingabe=in.nextLine();	//The current command saved as String
 			
 			if(eingabe.startsWith(" ")) eingabe=eingabe.substring(1);
@@ -83,6 +83,7 @@ public class Client{
 				if(loggedIn==false){
 					if(werte.length==2){
 						t.login(werte[1]);
+						//Wait for Server response and then: set Username und loggedIn=true
 						username=werte[1];
 						loggedIn=true;
 					}else{
