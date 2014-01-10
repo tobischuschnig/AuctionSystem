@@ -78,7 +78,6 @@ public class TCPConnector implements Runnable{
 					System.out.println("Senden initiiert");	
 					if(message==null){
 						try {
-							System.out.println("No Message yet");
 							con.await();							
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
@@ -86,7 +85,6 @@ public class TCPConnector implements Runnable{
 						}
 					}
 					objectOutput.writeObject(message);					 
-					 System.out.println(input.toString());
 					String s="";
 					try {
 						s = (String)input.readObject();

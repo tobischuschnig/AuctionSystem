@@ -19,7 +19,7 @@ public class Client{
 	static TaskExecuter t;
 	static TCPConnector tcp;
 	static CLI cli;
-	
+	static NotificationReceiver nr;	
 	
 	public Client(){
 		eingabe="";
@@ -35,6 +35,9 @@ public class Client{
 		cli=new CLI();
 		tcp=new TCPConnector(tcpPort,cli,c);
 		t=new TaskExecuter(c);
+		nr=new NotificationReceiver(c);
+//		Thread not=new Thread(nr);
+//		not.run();
 		c.run();
 		}catch(NumberFormatException e){
 			System.out.println("Port(s) is/are not numeric");
@@ -158,5 +161,11 @@ public class Client{
 	}
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
+	}
+	public int getUdpPort() {
+		return udpPort;
+	}
+	public static CLI getCli() {
+		return cli;
 	}
 }

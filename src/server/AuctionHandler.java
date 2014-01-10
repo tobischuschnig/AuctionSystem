@@ -49,7 +49,7 @@ public class AuctionHandler implements Runnable {
 						ArrayList<User> al = new ArrayList();
 						//Benachrichtgen aller User ausser dem der gewonnen hat
 						for(int ii = 0; ii < server.getUser().size(); ii++) {
-							if((server.getUser().get(ii).getName().equals(server.getAuction().get(i).getLastUser()))==false) {
+							if((server.getUser().get(ii).equals(server.getAuction().get(i).getLastUser()))==false) {
 								al.add(server.getUser().get(ii));
 								//TODO warum wird hier auch derjenige benachrichtig der usgeschlossen werden soll
 							}

@@ -2,6 +2,8 @@ package server;
 
 import java.util.ArrayList;
 
+import connect.Notifier;
+import connect.NotifierFactory;
 import connect.UDPNotifier;
 
 import model.*;
@@ -20,7 +22,7 @@ public class Server {
 	private String todo; //TODO brauch ich nicht mehr
 	private AuctionHandler ahandler;
 	private RequestHandler rhandler; 
-	private UDPNotifier udp;
+	private Notifier udp;
 	
 	/**
 	 * Der Standardkonstruktor hier werden alle Attribute die spaeter verwendet werden
@@ -31,7 +33,7 @@ public class Server {
 		auction=new ArrayList<Auction>();
 		ahandler = new AuctionHandler(this);
 		rhandler = new RequestHandler();
-		udp = new UDPNotifier();
+		udp = NotifierFactory.getUDPNotifer();
 		Thread athread = new Thread();
 		athread.setPriority(Thread.MIN_PRIORITY);
 		new Thread(ahandler).start();
@@ -53,7 +55,7 @@ public class Server {
 	 * @param message was geschickt werden soll
 	 */
 	public void notify(ArrayList<User> al, String message) {
-//		udp.notify(al,message);
+		udp.notify(al,message);
 		System.out.println(message); //TODO nach tests entfernen und wechseln
 	}
 	
