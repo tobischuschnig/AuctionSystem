@@ -34,13 +34,15 @@ public class TCPConnector implements Runnable{
 	ObjectOutputStream objectOutput; //Strem for Output
 	ObjectInputStream input; //Stream for Input
 	UI ui; //Output into CLI/GUI
+	Client client;
 	
-	public TCPConnector(int p, UI ui){
+	public TCPConnector(int p, UI ui,Client c){
 		tcpPort = p;
 		this.ui = ui;
 		con = lock.newCondition();
 //		con.await();
 		t = new Thread(this);
+		client=c;
 		
 		System.out.println("Connector started");
 		try {
@@ -88,6 +90,13 @@ public class TCPConnector implements Runnable{
 					String s="";
 					try {
 						s = (String)input.readObject();
+						if(message instanceof LoginMessage){
+							if(s.contains("Successfully")){
+								client.setLoggedIn(true);
+								System.out.println(message.getName());
+								client.setUsername(message.getName());
+							}
+						}
 						ui.out(s);
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block

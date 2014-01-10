@@ -40,14 +40,14 @@ public class ServerLogin implements ServerAction {
 			loger.setActive(true);
 			loger.setMessages(new ArrayList<String>());
 			server.getUser().add(loger);
-			return "Succesfully suscribed and loged in as: "+loger.getName();
+			return "Successfully suscribed and loged in as: "+loger.getName();
 		}
 		else if (loger != null && loger.isActive()==false){ //sonst active setzen 
 			loger.setAdresse(bid.getAdresse()); 
 			loger.setTcpPort(bid.getTcpPort()); 
 			loger.setUdpPort(bid.getUdpPort()); 
 			loger.setActive(true);
-			return "Succesfully loged in as: "+loger.getName();
+			return "Successfully loged in as: "+loger.getName();
 		}
 		return "This User is allready loged in please log out first!";
 		

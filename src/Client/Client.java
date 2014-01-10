@@ -33,7 +33,7 @@ public class Client{
 		udpPort=Integer.parseInt(args[2]);
 		Client c=new Client();
 		cli=new CLI();
-		tcp=new TCPConnector(tcpPort,cli);
+		tcp=new TCPConnector(tcpPort,cli,c);
 		t=new TaskExecuter(c);
 		c.run();
 		}catch(NumberFormatException e){
@@ -88,8 +88,8 @@ public class Client{
 					if(werte.length==2){
 						t.login(werte[1],host,tcpPort,udpPort);
 						//Wait for Server response and then: set Username und loggedIn=true
-						username=werte[1];
-						loggedIn=true;
+//						username=werte[1];
+//						loggedIn=true;
 					}else{
 					cli.out("Please enter User like:\n!login Username");
 					}
@@ -152,5 +152,11 @@ public class Client{
 	}
 	public String getUsername() {
 		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 }
