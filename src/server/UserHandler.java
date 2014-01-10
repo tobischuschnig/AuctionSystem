@@ -32,7 +32,7 @@ public class UserHandler implements Runnable{
 	private Socket client; //Socket-Verbindung mit Client
 	private boolean active = true;
 	ObjectInputStream in;
-	PrintWriter out;
+	ObjectOutputStream out;
 	private Thread executor; //Fuerht die Aktionen durch.
 	/**
 	 * 
@@ -43,7 +43,7 @@ public class UserHandler implements Runnable{
 		tcpPort = c.getPort();
 		try {
 			in = new ObjectInputStream( client.getInputStream());
-			out = new PrintWriter(client.getOutputStream(),true);
+			out = new ObjectOutputStream(client.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,7 +93,13 @@ public class UserHandler implements Runnable{
 				else{
 					ret = server.request(m);
 				}
-				out.println(ret);
+				try {
+					out.writeObject(ret);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		}
 		try {

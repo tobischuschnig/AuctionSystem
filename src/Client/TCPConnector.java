@@ -32,7 +32,7 @@ public class TCPConnector implements Runnable{
 	Thread t; //Thread in  dem das Programm läuft
 	//Fehlt Objekt für Ausgabe
 	ObjectOutputStream objectOutput; //Strem for Output
-	BufferedReader input; //Stream for Input
+	ObjectInputStream input; //Stream for Input
 	UI ui; //Output into CLI/GUI
 	
 	public TCPConnector(int p, UI ui){
@@ -46,7 +46,8 @@ public class TCPConnector implements Runnable{
 		try {
 			s = new Socket("localhost",tcpPort);
 			objectOutput = new ObjectOutputStream(s.getOutputStream());
-			input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			input = new ObjectInputStream(s.getInputStream());
+			objectOutput.writeObject(null); //Initialise stream
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +62,6 @@ public class TCPConnector implements Runnable{
 	 */
 	public void sendMessage(Message m){
 		lock.lock();
-		System.out.println(m.getName() + "MessagE");
 		message = m;
 		con.signal();
 		lock.unlock();
@@ -86,9 +86,14 @@ public class TCPConnector implements Runnable{
 					objectOutput.writeObject(message);					 
 					 System.out.println(input.toString());
 					String s="";
-					s = input.readLine();
-					ui.out("Gelesen:"+s);
-
+					try {
+						s = (String)input.readObject();
+						ui.out(s);
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					message=null;
 				}finally{
 					lock.unlock();
