@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 
+import model.LoginMessage;
 import model.Message;
 import model.User;
 
@@ -78,9 +79,21 @@ public class UserHandler implements Runnable{
 			
 			if(o instanceof Message){
 				m = (Message) o;
-
-				System.out.println(m.getName());
-				out.println("Got it");
+				//If message is Login-Message log user in
+				String ret;
+				if(m instanceof LoginMessage){
+					ret = server.request(m);
+					if(ret.startsWith("Succesfully")){
+						User tmp = new User();
+						tmp.setName(m.getName());;
+						user = server.getUser().get(server.getUser().indexOf(tmp));
+						System.out.println(user.getName());
+					}
+				}
+				else{
+					ret = server.request(m);
+				}
+				out.println(ret);
 			}
 		}
 		try {

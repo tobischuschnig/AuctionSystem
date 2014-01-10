@@ -96,6 +96,17 @@ public class User {
 	 */
 	public void setMessages(ArrayList<String> messages) {
 		this.messages = messages;
+		
+	}
+	
+	@Override
+	public boolean equals(Object u){
+		User a = (User) u;
+		if(a.getName().equals(getName())){
+			return true;
+		}
+		else 
+			return false;
 	}
 	
 }
