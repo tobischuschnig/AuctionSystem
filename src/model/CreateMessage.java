@@ -4,6 +4,12 @@ public class CreateMessage implements Message{
 	private String name;
 	private String desc;
 	private Long duration; //auf long geaendert da ueberall verwendet tobias 
+	
+	public CreateMessage(String name,String desc,Long duration){
+		this.name=name;
+		this.desc=desc;
+		this.duration=duration;
+	}
 	@Override
 	public String getName() {
 		return name;//null wurde vorher zurueckgeben -huang

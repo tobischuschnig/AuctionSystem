@@ -11,5 +11,7 @@ public class CLI implements UI{
 	public void out(String output) {
 		System.out.println(output);
 	}
-
+	public void outln(String output){
+		System.out.print(output);
+	}
 }

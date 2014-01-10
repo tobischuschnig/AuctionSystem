@@ -16,13 +16,14 @@ public class Client{
 	static int udpPort;
 	String eingabe;
 	Scanner in;
-	TaskExecuter t;
+	static TaskExecuter t;
+	static TCPConnector tcp;
+	static CLI cli;
 	
 	
 	public Client(){
 		eingabe="";
 		loggedIn=false;
-		t=new TaskExecuter();
 		username="";
 	}
 	public static void main(String[] args) {
@@ -31,6 +32,9 @@ public class Client{
 		tcpPort=Integer.parseInt(args[1]);
 		udpPort=Integer.parseInt(args[2]);
 		Client c=new Client();
+		cli=new CLI();
+		tcp=new TCPConnector(tcpPort,cli);
+		t=new TaskExecuter(c);
 		c.run();
 		}catch(NumberFormatException e){
 			System.out.println("Port(s) is/are not numeric");
@@ -48,7 +52,7 @@ public class Client{
 		
 		while(true){
 			in=new Scanner(System.in);
-			System.out.print(username+"> ");
+			cli.outln(username+"> ");
 			eingabe=in.nextLine();	//The current command saved as String
 			
 			if(eingabe.startsWith(" ")) eingabe=eingabe.substring(1);
@@ -69,28 +73,28 @@ public class Client{
 						try{
 							t.bid(Integer.parseInt(werte[1]),Double.parseDouble(werte[2]));
 						}catch(NumberFormatException e){
-							System.out.println("ID or Amount entered incorrect");
+							cli.out("ID or Amount entered incorrect");
 						}
 					}else{
-						System.out.println("Please enter ID and Amount like:\n!bid ID Amount");
+						cli.out("Please enter ID and Amount like:\n!bid ID Amount");
 					}
 				}else{
-					System.out.println("Currently not logged in\nPlease login first");
+					cli.out("Currently not logged in\nPlease login first");
 				}
 				//If command is login
 			}else if(eingabe.startsWith("!login")){
 				String[] werte=original.split(" ");		//Original is used
 				if(loggedIn==false){
 					if(werte.length==2){
-						t.login(werte[1]);
+						t.login(werte[1],host,tcpPort,udpPort);
 						//Wait for Server response and then: set Username und loggedIn=true
 						username=werte[1];
 						loggedIn=true;
 					}else{
-					System.out.println("Please enter User like:\n!login Username");
+					cli.out("Please enter User like:\n!login Username");
 					}
 				}else{
-					System.out.println("Already logged in, logout first!");
+					cli.out("Already logged in, logout first!");
 				}
 				//If command is create
 			}else if(eingabe.startsWith("!create")){
@@ -102,7 +106,7 @@ public class Client{
 				}
 				t.create(Long.parseLong(werte[1]),desc);
 				}else{
-					System.out.println("Currently not logged in\nPlease login first");
+					cli.out("Currently not logged in\nPlease login first");
 				}
 //				if(werte.length==3){
 //					try{
@@ -121,7 +125,7 @@ public class Client{
 					loggedIn=false;
 					username="";
 				}else{
-					System.out.println("Logout not possible, not logged in!");
+					cli.out("Logout not possible, not logged in!");
 				}
 				
 				//If command is end
@@ -133,8 +137,20 @@ public class Client{
 			}
 				//If command is not recognized, another try will be granted
 			else{
-				System.out.println("Could not recognize input\nPlease try again");
+				cli.out("Could not recognize input\nPlease try again");
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
+	}
+	public static TCPConnector getTcp() {
+		System.out.println("getMethode");
+		return tcp;
+	}
+	public String getUsername() {
+		return username;
 	}
 }

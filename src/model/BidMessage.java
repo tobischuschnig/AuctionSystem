@@ -5,6 +5,11 @@ public class BidMessage implements Message{
 	private int id;
 	private double amount;
 	
+	public BidMessage(String name,int id,double amount){
+		this.name=name;
+		this.id=id;
+		this.amount=amount;
+	}
 	@Override
 	public String getName() {
 		return name;//war vorher null -huang

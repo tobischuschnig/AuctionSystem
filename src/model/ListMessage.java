@@ -3,6 +3,9 @@ package model;
 public class ListMessage implements Message{
 	private String name;
 	
+	public ListMessage(String name){
+		this.name=name;
+	}
 	@Override
 	public String getName() {
 		return name;//null wurde vorher zurueckgeben -huang

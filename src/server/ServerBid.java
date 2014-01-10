@@ -61,7 +61,7 @@ public class ServerBid implements ServerAction {
 						+server.getAuction().get(i).getDescription()+"'.";
 				}
 				else { //Fehlermeldung nicht hoeher als das vorherige
-					return "Your bid must be higher then the current bid! The current bid ist: "+
+					return "Your bid must be higher then the current bid! The current bid is: "+
 								server.getAuction().get(i).getHighestBid();
 				}
 			}
