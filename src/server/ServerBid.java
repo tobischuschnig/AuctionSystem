@@ -57,7 +57,10 @@ public class ServerBid implements ServerAction {
 					}
 					
 					//Informieren das das gebot erfolgreich war
-					return "You successfully bid with "+bid.getAmount()+" on '"
+					//return "You successfully bid with "+bid.getAmount()+" on '"
+					//	+server.getAuction().get(i).getDescription()+"'.";
+					
+					return "You successfully bid with "+server.getAuction().get(i).getHighestBid()+" on '"
 						+server.getAuction().get(i).getDescription()+"'.";
 				}
 				else { //Fehlermeldung nicht hoeher als das vorherige
