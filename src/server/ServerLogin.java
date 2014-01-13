@@ -47,7 +47,8 @@ public class ServerLogin implements ServerAction {
 			loger.setUdpPort(bid.getUdpPort()); 
 			loger.setActive(true);
 			if(loger.getMessages().size() != 0){
-				ret += loger.getMessages().toString();
+				for(String s : loger.getMessages())
+					ret += s + "\n";
 			}
 			else
 				ret ="No Messages";
