@@ -7,32 +7,30 @@ import model.Message;
 import model.User;
 
 /**
- * Diese Klasse ist fuer eine Funktion des Servers verantwortlich
- * Wenn eine LoginMessage in der Methode request uebergeben wird wird dieser ServerLogin
- * aufgerufen.
- * Anschliessend wird der User angelegt oder auf active gesetzt
- * @author Tobias
+ * This class is responsible for a functionality off the server.
+ * Is the login server for the users this class is called via the RequestHandler.
+ * @author Tobias Schuschnig
  * @version 2014-01-05
  */
 public class ServerLogin implements ServerAction {
 	
 	/**
-	 * Mithifle der LoginMessage den User anlegen oder einloggen
-	 * @param server der Server auf dem gearbeitet wird
-	 * @param message die LoginMessage mit allen Parametern
-	 * @return die Error oder Succesmeldung
+	 * In this Method the functionality of login is implemented
+	 * @param message contains every parameters for the work step
+	 * @param server which should be used
+	 * @return result of the operation which is handed over to the client via TCP to the client.
 	 */
 	@Override
 	public String doOperation(Message message, Server server) {
 		LoginMessage bid = (LoginMessage) message;
 		String ret="";
 		User loger = null;
-		for(int i=0;i < server.getUser().size();i++) { //Suchen des Users
+		for(int i=0;i < server.getUser().size();i++) { //searches if the user exists
 			if(bid.getName().equals(server.getUser().get(i).getName())) {
 				loger = server.getUser().get(i);
 			}
 		}
-		if(loger == null) { // Wenn nicht vorhanden anlegen
+		if(loger == null) { //if the user doesn't exists it is created
 			loger = new User();
 			loger.setName(bid.getName());
 			loger.setAdresse(bid.getAdresse()); 
@@ -43,7 +41,7 @@ public class ServerLogin implements ServerAction {
 			server.getUser().add(loger);
 			return "Successfully suscribed and loged in as: "+loger.getName();
 		}
-		else if (loger != null && loger.isActive()==false){ //sonst active setzen 
+		else if (loger != null && loger.isActive()==false){ //if the user exists active is set true
 			loger.setAdresse(bid.getAdresse()); 
 			loger.setTcpPort(bid.getTcpPort()); 
 			loger.setUdpPort(bid.getUdpPort()); 

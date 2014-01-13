@@ -6,7 +6,7 @@ import model.Message;
 /**
  * This class is responsible for a functionality off the server.
  * Lists all auctions this class is called via the RequestHandler.
- * @author Tobias
+ * @author Tobias Schuschnig
  * @version 2014-01-05
  */
 public class ServerList implements ServerAction {

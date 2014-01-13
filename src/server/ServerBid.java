@@ -10,7 +10,7 @@ import model.User;
 /**
  * This class is responsible for the a functionality of the server.
  * If the client bids on an auction this class is called via the RequestHandler.
- * @author Tobias
+ * @author Tobias Schuschnig
  * @version 2014-01-05
  */
 public class ServerBid implements ServerAction {

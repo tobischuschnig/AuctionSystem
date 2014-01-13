@@ -9,7 +9,7 @@ import model.User;
 /**
  * This class is responsible for a functionality off the server.
  * If the client creates an auction this class is called via the RequestHandler.
- * @author Tobias
+ * @author Tobias Schuschnig
  * @version 2014-01-05
  */
 public class ServerCreate implements ServerAction{
