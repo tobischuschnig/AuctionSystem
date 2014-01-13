@@ -67,7 +67,7 @@ public class AuctionHandler implements Runnable {
 					else {
 						//The end of an auction if nobody has bidden. 
 						server.notify(server.getUser(),"The auction '"
-								+server.getAuction().get(i).getDescription()+"' hast ended. Nobody bidded.");
+								+server.getAuction().get(i).getDescription()+"' has ended. Nobody bidded.");
 					}
 				}
 			}
