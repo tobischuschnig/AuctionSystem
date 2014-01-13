@@ -3,22 +3,26 @@ package server;
 import model.*;
 
 /**
- * Hier wird der Request ueberprueft und die entsprechende Server Funktionalitaet aufgerufen
- * @author Tobias
+ * In this class the Request is checked an progressed to the right server where the 
+ * functionality is implemented. 
+ * @author Tobias Schuschnig
  * @version 2013-01-05
  */
 public class RequestHandler {
-	private ServerAction serverAction; //TODO soll ich hier das verwenden oder so wie es ist
+	private ServerAction serverAction; //TODO should this server be used or should their be an new
+	//object
 	
 	/**
 	 * Uberprueft welche Message uebergeben wurde und ruft dann den entsprechenden Server auf
-	 * @param message die Message die alle Parameter beinhaltet und was gemacht werden soll
-	 * @param server der Server auf dem gearbeitet werden soll
-	 * @return das Ergebniss der Operation das via TCP an den Client weitergegeben werden soll
+	 * Verify wich Message was handed over and calls the server where the functionality is
+	 * implemented.
+	 * @param message contains every parameters for the work step.
+	 * @param server which should be used
+	 * @return result of the operation which is handed over to the client via TCP.
 	 */
 	public String execute(Message message,Server server) {
 		String wert = "";
-		//TODO alle Nachrichten richtig verarbeitet
+		//TODO are all messages correct progressed
 		if(message instanceof BidMessage) { //Message = BidMessage
 			ServerBid bid = new ServerBid();
 			wert = bid.doOperation(message, server);
@@ -26,7 +30,7 @@ public class RequestHandler {
 		else if(message instanceof CreateMessage) {  //Message = CreateMessage
 			ServerCreate create = new ServerCreate();
 			wert = create.doOperation(message, server);
-			//TODO hat eig keinen rueckgabewert
+			//TODO the create operation has no result
 		}
 		else if(message instanceof ListMessage) { //Message = ListMessage
 			ServerList list = new ServerList();

@@ -17,10 +17,10 @@ import model.User;
 public class ServerCreate implements ServerAction{
 
 	/**
-	 * Hier wird die neue Auktion mit den Parametern der CreateMessage erstellt
-	 * @param server der Server auf dem gearbeitet wird
-	 * @param message die CreateMessage mit allen Parametern
-	 * @return die Error oder Succesmeldung
+	 * In this Method the functionality of create auction is implemented
+	 * @param message contains every parameters for the work step
+	 * @param server which should be used
+	 * @return result of the operation which is handed over to the client via TCP to the client.
 	 */
 	@Override
 	public String doOperation(Message message, Server server) {

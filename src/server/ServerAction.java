@@ -4,16 +4,16 @@ import model.Message;
 import server.Server;;
 
 /**
- * Interface fuer alle Serverfunktionalitaeten
- * @author Tobias
+ * Interface for all server functionalities
+ * @author Tobias Schuschnit
  * @version 2013-01-05 
  */
 public interface ServerAction {
 	/**
-	 * In dieser Methode werden die jeweiligen Server Operationen durchgefuert
-	 * @param message die Message mit allen Anweisungen
-	 * @param server der Server auf dem gearbeitet werden soll
-	 * @return das Ergebnis der Operation
+	 * In this Method the user request will be processed
+	 * @param message contains every parameters for the work step
+	 * @param server which should be used
+	 * @return result of the operation which is handed over to the client via TCP to the client.
 	 */
 	public String doOperation(Message message,Server server);
 }

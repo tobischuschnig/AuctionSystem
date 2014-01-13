@@ -6,40 +6,39 @@ import java.util.Date;
 import model.*;
 
 /**
- * Hier uerberpruefe ich ob Auktionen abgelaufen sind
- * @author tobi
+ * Checks if an Auction is over and notifies the Users about it.
+ * @author Tobias Schuschnig
  * @version 2013-01-05
  */
 public class AuctionHandler implements Runnable {
-	//private ArrayList<Auction> auction; //TODO brauch ich eig net da ich mir die Auctions immer neu 
-	//holen muss
+	//private ArrayList<Auction> auction; //TODO useless because the auctions musst be on the 
+	//newest version
 	private Server server;
 
 	/**
-	 * Konstruktor mit uebergabe des benoetigten Servers
-	 * @param server der Server auf dem ich arbeite
+	 * Konstructor with the used server as a parameter.
+	 * @param server the Server where the work is done.
 	 */
 	public AuctionHandler(Server server) {
 		this.server = server;
 	}
 	
 	/**
-	 * Uberpruefung mittels eines Threads ob die Auktionen die Deadline noch nicht 
-	 * ueberschritten haben.
+	 * Checks with the help of a thread if an auction reached its deadline.
 	 */
 	@Override
 	public void run() {
 		while(true) {
 			Date now = new Date();
 			//System.out.println(now);
-			for(int i=0;i< server.getAuction().size();i++) { //Alle Autkionen durchgehen
-				//Schauen ob sie abgelaufen ist
+			for(int i=0;i< server.getAuction().size();i++) { //Goes through all auctions
+				//Checks if the auction is over
 				if(server.getAuction().get(i).getDeadline().compareTo(now) <= 0 && 
-						server.getAuction().get(i).isFinished() == false) { //TODO Fehler Zeile 37 NullPointer Exception
+						server.getAuction().get(i).isFinished() == false) { //TODO Error Line 37 NullPointer Exception
 					server.getAuction().get(i).setFinished(true);
 					//System.out.println(server.getAuction().get(i).getDescription()+ " is over.");
 
-					//Schauen ob jemand auf diese Auktion geboten hat
+					//Checks if somebody bidded on this auction to notfiy the right persons
 					if(server.getAuction().get(i).getLastUser() != null) {
 
 						String wert = "The auction '"+server.getAuction().get(i).getDescription()+
@@ -47,16 +46,16 @@ public class AuctionHandler implements Runnable {
 								server.getAuction().get(i).getHighestBid()+". \n";
 
 						ArrayList<User> al = new ArrayList();
-						//Benachrichtgen aller User ausser dem der gewonnen hat
+						//Notifys all Users except the one who has won the aution
 						for(int ii = 0; ii < server.getUser().size(); ii++) {
 							if((server.getUser().get(ii).equals(server.getAuction().get(i).getLastUser()))==false) {
 								al.add(server.getUser().get(ii));
-								//TODO warum wird hier auch derjenige benachrichtig der usgeschlossen werden soll
+								//TODO why does the user woh bidded also gets this specific message.
 							}
 						}
 						server.notify(al,wert);
 
-						//benachrichtigen des Users der gewonnen hat
+						//Notifys the user woh has won the auction
 						String wert1 = "The auction '"+server.getAuction().get(i).getDescription()+
 								"' has ended. You won with "+
 								server.getAuction().get(i).getHighestBid()+". \n";
@@ -66,7 +65,7 @@ public class AuctionHandler implements Runnable {
 						server.notify(al, wert1);
 					}
 					else {
-						//Wenn niemand geboten hat
+						//The end of an auction if nobody has bidden. 
 						server.notify(server.getUser(),"The auction '"
 								+server.getAuction().get(i).getDescription()+"' hast ended. Nobody bidded.");
 					}

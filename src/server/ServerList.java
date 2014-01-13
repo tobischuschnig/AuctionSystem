@@ -24,17 +24,19 @@ public class ServerList implements ServerAction {
 		ListMessage bid = (ListMessage) message;
 		String out = "";
 		for(int i=0;i< server.getAuction().size();i++) { // durchgehen der Auktionen in out schreiben
-			String hilf;
-			if (server.getAuction().get(i).getLastUser() == null) { //Wenn es keinen Bieter gibt
-				hilf = "none";
+			if(server.getAuction().get(i).isFinished() == false) {
+				String hilf;
+				if (server.getAuction().get(i).getLastUser() == null) { //Wenn es keinen Bieter gibt
+					hilf = "none";
+				}
+				else {
+					hilf=server.getAuction().get(i).getLastUser().getName();
+				}
+				out+=   "ID: "+ server.getAuction().get(i).getId()+ 
+						"    Description: " +server.getAuction().get(i).getDescription()+ 
+						"    Highestbid: " + server.getAuction().get(i).getHighestBid() + 
+						"    from: "+hilf+"\n";
 			}
-			else {
-				hilf=server.getAuction().get(i).getLastUser().getName();
-			}
-			out+=   "ID: "+ server.getAuction().get(i).getId()+ 
-					"    Description: " +server.getAuction().get(i).getDescription()+ 
-					"    Highestbid: " + server.getAuction().get(i).getHighestBid() + 
-					"    from: "+hilf+"\n";
 		}
 		return out;
 		

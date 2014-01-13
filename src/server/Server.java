@@ -9,9 +9,9 @@ import connect.UDPNotifier;
 import model.*;
 
 /**
- * Der Server mit allen Funktionalitaeten sowie den Daten der User.
- * Hat eine request Methode auf der alle Anfragen angenommen werdne und weitergeleitet werden
- * @author Tobias
+ * The main server with all functionalities and the user data.
+ * Has a request method which responds on every request from the client.
+ * @author Tobias Schuschnig
  * @version 2013-01-05
  */
 public class Server {
@@ -19,7 +19,7 @@ public class Server {
 	private int tcpPort;
 	private ArrayList<User> user;
 	private ArrayList<Auction> auction;
-	private String todo; //TODO brauch ich nicht mehr
+	private String todo; //TODO considered useless with the now strategy 
 	private AuctionHandler ahandler;
 	private RequestHandler rhandler; 
 	private Notifier udp;
@@ -27,6 +27,8 @@ public class Server {
 	/**
 	 * Der Standardkonstruktor hier werden alle Attribute die spaeter verwendet werden
 	 * initialisiert.
+	 * The standard konstructor where are all attributes are set up and the attributes are
+	 * initialised.
 	 */
 	public Server() {
 		user=new ArrayList<User>();
@@ -40,23 +42,23 @@ public class Server {
 	}
 
 	/**
-	 * Hier werden alle Anfragen angenommen und an den RequestHandler weitergegeben
-	 * @param message die Message die alle Parameter beinhaltet und was gemacht werden soll
-	 * @return das Ergebniss der Operation das via TCP an den Client weitergegeben werden soll
+	 * This method receives all requests of the client
+	 * @param message contains every parameters for the work step
+	 * @return result of the operation which is handed over to the client via TCP.
 	 */
 	public String request(Message message) {
 		return rhandler.execute(message, this);
 	}
 	
 	/**
-	 * Hier wird die notify Methode des UDPNotifiers aufgerufen der die Nachricht via
-	 * UDP an die entsprechenden Clients schickt
-	 * @param al die betroffenen User die die Message erhalten sollen
-	 * @param message was geschickt werden soll
+	 * In this method the notify method of the class UDPNotifiers is called. There the 
+	 * message is forwarded via UDP to the correct clients.
+	 * @param al contains the users which should receive the message
+	 * @param message the message which is sended to the client.
 	 */
 	public void notify(ArrayList<User> al, String message) {
 		udp.notify(al,message);
-		System.out.println(message); //TODO nach tests entfernen und wechseln
+		System.out.println(message); //TODO only for testing after that delete
 	}
 	
 	
