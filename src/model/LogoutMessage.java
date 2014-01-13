@@ -3,6 +3,9 @@ package model;
 public class LogoutMessage implements Message{
 	private String name;
 	
+	public LogoutMessage() {
+	}
+	
 	public LogoutMessage(String name){
 		this.name=name;
 	}

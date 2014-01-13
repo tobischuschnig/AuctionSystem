@@ -5,6 +5,9 @@ public class LoginMessage implements Message{
 	private String adresse;
 	private int tcpPort, udpPort;
 	
+	public LoginMessage() {
+	}
+	
 	public LoginMessage(String name,String adresse,int tcpPort,int udpPort){
 		this.name=name;
 		this.adresse=adresse;

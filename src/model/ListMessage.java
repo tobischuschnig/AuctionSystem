@@ -3,6 +3,9 @@ package model;
 public class ListMessage implements Message{
 	private String name;
 	
+	public ListMessage() {
+	}
+	
 	public ListMessage(String name){
 		this.name=name;
 	}

@@ -5,6 +5,9 @@ public class CreateMessage implements Message{
 	private String desc;
 	private Long duration; //auf long geaendert da ueberall verwendet tobias 
 	
+	public CreateMessage() {
+	}
+	
 	public CreateMessage(String name,String desc,Long duration){
 		this.name=name;
 		this.desc=desc;
