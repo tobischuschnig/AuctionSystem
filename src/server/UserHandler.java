@@ -104,6 +104,8 @@ public class UserHandler implements Runnable{
 		}
 		try {
 			client.close();
+			if(user.isActive())
+				user.setActive(false);
 		} catch (IOException e) {
 			System.out.println("Could not close client");
 		}

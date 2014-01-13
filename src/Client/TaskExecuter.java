@@ -1,5 +1,8 @@
 package Client;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import model.*;
 
 /**
@@ -16,9 +19,15 @@ public class TaskExecuter {
 		client=c;
 		tcp=c.getTcp();
 	}
-	public void login(String username,String adresse,int tcpPort,int udpPort){
+	public void login(String username,int tcpPort,int udpPort){
 		//System.out.println("Login "+username);
-		LoginMessage lm=new LoginMessage(username,adresse,tcpPort,udpPort);
+		String ip="";
+		try {
+			ip=InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			System.out.println("Could not resolve ip address!");
+		}
+		LoginMessage lm=new LoginMessage(username,ip,tcpPort,udpPort);
 		tcp.sendMessage(lm);
 	}
 	public void logout(){

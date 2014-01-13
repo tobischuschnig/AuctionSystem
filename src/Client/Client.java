@@ -11,41 +11,29 @@ import java.util.Scanner;
 public class Client{
 	String username;
 	boolean loggedIn;
-	static String host;
-	static int tcpPort;
-	static int udpPort;
+	String host;
+	int tcpPort;
+	int udpPort;
 	String eingabe;
 	Scanner in;
-	static TaskExecuter t;
-	static TCPConnector tcp;
-	static CLI cli;
-	static NotificationReceiver nr;	
+	TaskExecuter t;
+	TCPConnector tcp;
+	CLI cli;
+	NotificationReceiver nr;	
 	
-	public Client(){
+	public Client(String host,int tcpPort,int udpPort){
 		eingabe="";
 		loggedIn=false;
 		username="";
-	}
-	public static void main(String[] args) {
-		try{
-		host=args[0];
-		tcpPort=Integer.parseInt(args[1]);
-		udpPort=Integer.parseInt(args[2]);
-		Client c=new Client();
+		this.host=host;
+		this.tcpPort=tcpPort;
+		this.udpPort=udpPort;
 		cli=new CLI();
-		tcp=new TCPConnector(tcpPort,cli,c);
-		t=new TaskExecuter(c);
-		nr=new NotificationReceiver(c);
-//		Thread not=new Thread(nr);
-//		not.run();
-		c.run();
-		}catch(NumberFormatException e){
-			System.out.println("Port(s) is/are not numeric");
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		tcp=new TCPConnector(tcpPort, cli, this);
+		t=new TaskExecuter(this);
+		nr=new NotificationReceiver(this);
 	}
-	
+
 	
 	/**
 	 * Holt dauernd die Eingabe des Users und leitet sie an den Server
@@ -89,7 +77,7 @@ public class Client{
 				String[] werte=original.split(" ");		//Original is used
 				if(loggedIn==false){
 					if(werte.length==2){
-						t.login(werte[1],host,tcpPort,udpPort);
+						t.login(werte[1],tcpPort,udpPort);
 						//Wait for Server response and then: set Username und loggedIn=true
 //						username=werte[1];
 //						loggedIn=true;
@@ -149,7 +137,7 @@ public class Client{
 			}
 		}
 	}
-	public static TCPConnector getTcp() {
+	public TCPConnector getTcp() {
 		System.out.println("getMethode");
 		return tcp;
 	}
@@ -165,13 +153,13 @@ public class Client{
 	public int getUdpPort() {
 		return udpPort;
 	}
-	public static CLI getCli() {
+	public CLI getCli() {
 		return cli;
 	}
-	public static String getHost() {
+	public String getHost() {
 		return host;
 	}
-	public static int getTcpPort() {
+	public int getTcpPort() {
 		return tcpPort;
 	}
 }

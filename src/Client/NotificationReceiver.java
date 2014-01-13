@@ -19,17 +19,18 @@ public class NotificationReceiver implements Runnable{
 		DatagramSocket ds = null;
 		try {
 			ds = new DatagramSocket(client.getUdpPort());
+			System.out.println(client.getUdpPort());
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		while(true){
-			byte[] buf = new byte[6000];
+			byte[] buf = new byte[1024];
 			System.out.println("receie");
 			DatagramPacket p=new DatagramPacket(buf, buf.length);
 			try {
 				ds.receive(p);
-				client.getCli().out(new String(p.getData()));
+				client.getCli().out(new String(p.getData()).trim());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
