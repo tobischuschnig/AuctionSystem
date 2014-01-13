@@ -19,7 +19,8 @@ public class Client{
 	TaskExecuter t;
 	TCPConnector tcp;
 	CLI cli;
-	NotificationReceiver nr;	
+	NotificationReceiver nr;
+	boolean active;
 	
 	public Client(String host,int tcpPort,int udpPort){
 		eingabe="";
@@ -32,6 +33,7 @@ public class Client{
 		tcp=new TCPConnector(tcpPort, cli, this);
 		t=new TaskExecuter(this);
 		nr=new NotificationReceiver(this);
+		active=true;
 	}
 
 	
@@ -41,7 +43,7 @@ public class Client{
 	 */
 	public void run() {
 		
-		while(true){
+		while(active){
 			in=new Scanner(System.in);
 			cli.outln(username+"> ");
 			eingabe=in.nextLine();	//The current command saved as String
@@ -123,7 +125,7 @@ public class Client{
 				//If command is end
 			}else if(eingabe.startsWith("!end")){
 				in.close();	//Free ressources
-				break;		//Exits the loop
+				active=false;		//Exits the loop
 				//System.exit(0);
 				//TcpConnector isActive:false, NotificationReceiver isActive:false
 			}
@@ -162,5 +164,8 @@ public class Client{
 	}
 	public int getTcpPort() {
 		return tcpPort;
+	}
+	public boolean isActive() {
+		return active;
 	}
 }
