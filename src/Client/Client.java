@@ -95,6 +95,7 @@ public class Client{
 				for(int i=2;i<=werte.length-1;i++){
 					desc=desc+" "+werte[i];
 				}
+				if(desc.startsWith(" ")) desc=desc.substring(1);
 				t.create(Long.parseLong(werte[1]),desc);
 				}else{
 					cli.out("Currently not logged in\nPlease login first");
