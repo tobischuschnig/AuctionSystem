@@ -21,7 +21,12 @@ public class Client{
 	CLI cli;
 	NotificationReceiver nr;
 	boolean active;
-	
+	/**
+	 * Constructor sets Server-IP,TCP-Port and UDP-Port
+	 * @param host
+	 * @param tcpPort
+	 * @param udpPort
+	 */
 	public Client(String host,int tcpPort,int udpPort){
 		eingabe="";
 		loggedIn=false;
@@ -38,13 +43,11 @@ public class Client{
 
 	
 	/**
-	 * Holt dauernd die Eingabe des Users und leitet sie an den Server
-	 * ueber entsprechende Methoden weiter
+	 * Reads permantly the user input and calls the methods
 	 */
 	public void run() {
-		
+		in=new Scanner(System.in);
 		while(active){
-			in=new Scanner(System.in);
 			cli.outln(username+"> ");
 			eingabe=in.nextLine();	//The current command saved as String
 			
@@ -102,15 +105,6 @@ public class Client{
 				}else{
 					cli.out("Currently not logged in\nPlease login first");
 				}
-//				if(werte.length==3){
-//					try{
-//					t.create(Long.parseLong(werte[1]),werte[2]);
-//					}catch(NumberFormatException e){
-//						System.out.println("Duration was entered incorrect, not a number!");
-//					}
-//				}else{
-//				System.out.println("Please enter Create like:\n!create duration description");
-//			}
 				
 				//If command is logout
 			}else if(eingabe.startsWith("!logout")){
@@ -126,7 +120,6 @@ public class Client{
 			}else if(eingabe.startsWith("!end")){
 				in.close();	//Free ressources
 				active=false;		//Exits the loop
-				//System.exit(0);
 				//TcpConnector isActive:false, NotificationReceiver isActive:false
 			}
 				//If command is not recognized, another try will be granted

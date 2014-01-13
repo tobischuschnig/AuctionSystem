@@ -1,20 +1,26 @@
 package Client;
-
+/**
+ * This class starts the client
+ * @author Dominik Valka
+ * @version 2014-01-09
+ */
 public class MainClient {
 
 	public static void main(String[] args) {
+		if(args.length!=3){
+			System.out.println("Wrong arguments\nServer-IP TCP-Port UDP-Port");
+			System.exit(0);		//If there are no 3 arguments, program exits immediately
+		}
 		try{
 		String host=args[0];
 		int tcpPort=Integer.parseInt(args[1]);
-		int udpPort=Integer.parseInt(args[2]);
+		int udpPort=Integer.parseInt(args[2]);	//Save arguments
 		Client c=new Client(host,tcpPort,udpPort);
-//		Thread not=new Thread(nr);
-//		not.run();
-		c.run();
+		c.run();		//Start Client
 		}catch(NumberFormatException e){
 			System.out.println("Port(s) is/are not numeric");
 		}catch(Exception e){
-			e.printStackTrace();
+			System.out.println("Can not connect to Server");
 		}
 	}
 	
