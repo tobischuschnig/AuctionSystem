@@ -7,10 +7,8 @@ import model.Message;
 import model.User;
 
 /**
- * Diese Klasse ist fuer eine Funktion des Servers verantwortlich
- * Wenn eine CreateMessage in der Methode request uebergeben wird wird dieser ServerCreate 
- * aufgerufen.
- * Anschliessend wird eine neue Auktion mit den Parametern der CreateMessage erstellt.
+ * This class is responsible for a functionality off the server.
+ * If the client creates an auction this class is called via the RequestHandler.
  * @author Tobias
  * @version 2014-01-05
  */
@@ -26,15 +24,15 @@ public class ServerCreate implements ServerAction{
 	public String doOperation(Message message, Server server) {
 		CreateMessage create = (CreateMessage) message;
 		User creater = null;
-		for(int i=0;i < server.getUser().size();i++) { //Suchen des Users der es erstellt hat
+		for(int i=0;i < server.getUser().size();i++) { //searches for the user who has created the auction
 			if(create.getName().equals(server.getUser().get(i).getName())) {
 				creater = server.getUser().get(i);
 			}
 		}
-		if (creater == null) { //wenn der User nicht existiert wird abgebrochen mit Fehlermeldung.
+		if (creater == null) { //if the user doesn't exists the operation is canceled with an error message
 			return "This User doesn't exists please log in first!";
 		}
-		//Hinzufuegen der Auktion und Erfolg ausgeben.
+		//adds the auction to the list
 		Auction hilf = new Auction(creater, create.getDesc(),  create.getDuration() , server.getAuction().size() );
 		server.getAuction().add(hilf);
 		server.notify(server.getUser(),"An auction '"+hilf.getDescription()+"' with the ID: "
