@@ -46,7 +46,7 @@ public class TCPConnector implements Runnable{
 		
 		System.out.println("Connector started");
 		try {
-			s = new Socket("localhost",tcpPort);
+			s = new Socket(c.getHost(),tcpPort);
 			objectOutput = new ObjectOutputStream(s.getOutputStream());
 			input = new ObjectInputStream(s.getInputStream());
 			objectOutput.writeObject(null); //Initialise stream

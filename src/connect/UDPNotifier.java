@@ -25,11 +25,18 @@ public class UDPNotifier implements Notifier{
 		DatagramPacket dp = new DatagramPacket(buf, buf.length);
 		for (User user : al) {
 			try {
-				System.out.println("send" + user.getAdresse()+":"+user.getUdpPort());
-				ds = new DatagramSocket();
-				InetAddress address = InetAddress.getByName(user.getAdresse());
-				dp = new DatagramPacket(buf, buf.length, address,user.getUdpPort());
-				ds.send(dp);
+				if(user.isActive()){
+					System.out.println("send" + user.getAdresse()+":"+user.getUdpPort());
+					ds = new DatagramSocket();
+					InetAddress address = InetAddress.getByName(user.getAdresse());
+					dp = new DatagramPacket(buf, buf.length, address,user.getUdpPort());
+					ds.send(dp);
+				}
+				else{
+						user.getMessages().add(message);
+						System.out.println(message);
+					}
+				
 			} catch (SocketException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

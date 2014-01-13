@@ -25,6 +25,7 @@ public class ServerLogin implements ServerAction {
 	@Override
 	public String doOperation(Message message, Server server) {
 		LoginMessage bid = (LoginMessage) message;
+		String ret="";
 		User loger = null;
 		for(int i=0;i < server.getUser().size();i++) { //Suchen des Users
 			if(bid.getName().equals(server.getUser().get(i).getName())) {
@@ -47,7 +48,12 @@ public class ServerLogin implements ServerAction {
 			loger.setTcpPort(bid.getTcpPort()); 
 			loger.setUdpPort(bid.getUdpPort()); 
 			loger.setActive(true);
-			return "Successfully loged in as: "+loger.getName();
+			if(loger.getMessages().size() != 0){
+				ret += loger.getMessages().toString();
+			}
+			else
+				ret ="No Messages";
+			return "Successfully loged in as: "+loger.getName()+"\nUnread messages: "+ret;
 		}
 		return "This User is allready loged in please log out first!";
 		

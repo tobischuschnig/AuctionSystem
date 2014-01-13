@@ -168,4 +168,10 @@ public class Client{
 	public static CLI getCli() {
 		return cli;
 	}
+	public static String getHost() {
+		return host;
+	}
+	public static int getTcpPort() {
+		return tcpPort;
+	}
 }
