@@ -79,9 +79,9 @@ public class UserHandler implements Runnable{
 					ret = server.request(m);
 					if(ret.startsWith("Successfully")){
 						User tmp = new User();
-						tmp.setName(m.getName());;
+						tmp.setName(m.getName());
 						user = server.getUser().get(server.getUser().indexOf(tmp));
-						//System.out.println(user.getName());
+						System.out.println(user.getName());
 					}
 				}
 				else{

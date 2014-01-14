@@ -38,13 +38,16 @@ public class NotificationReceiver implements Runnable{
 			byte[] buf = new byte[1024];
 			DatagramPacket p=new DatagramPacket(buf, buf.length);
 			try {
-				ds.receive(p);
-				client.getCli().outln("\n"+new String(p.getData()).trim()+"\n"+client.getUsername()+"> ");
+				if(ds!=null){
+					ds.receive(p);
+					client.getCli().outln("\n"+new String(p.getData()).trim()+"\n"+client.getUsername()+"> ");
+				}
 			} catch (IOException e) {
 				//Timeout
 			}
 			
 		}
-		ds.close();
+		if(ds != null)
+			ds.close();
 	}	
 }

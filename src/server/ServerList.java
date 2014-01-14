@@ -36,6 +36,8 @@ public class ServerList implements ServerAction {
 						"    from: "+hilf+"\n";
 			}
 		}
+		if(out.equals(""))
+			out = "No auctions yet";
 		return out;
 		
 	}

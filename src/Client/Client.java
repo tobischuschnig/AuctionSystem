@@ -50,7 +50,7 @@ public class Client{
 		Scanner in;
 		in=new Scanner(System.in);
 		while(active){
-			cli.outln(username+"> ");
+			cli.outln("\n"+username+"> ");
 			eingabe=in.nextLine();	//The current command saved as String
 			
 			if(eingabe.startsWith(" ")) eingabe=eingabe.substring(1);
