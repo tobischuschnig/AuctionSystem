@@ -1,62 +1,90 @@
+/**
+ * 
+ */
 package model.test;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
+import model.BidMessage;
+
 import org.junit.Before;
 import org.junit.Test;
-import Client.*;
-import connect.*;
-import model.*;
-import server.*;
 
 /**
- * 
- * @author Kuanlun Huang
- * @version
+ * @author tobi
+ *
  */
 public class BidMessageTest {
-	BidMessage test;
+
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		test=new BidMessage();
 	}
 
-	@After
-	public void tearDown() throws Exception {
+	/**
+	 * Test method for {@link model.BidMessage#BidMessage()}.
+	 */
+	@Test
+	public void testBidMessage() {
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.BidMessage#BidMessage(java.lang.String, int, double)}.
+	 */
+	@Test
+	public void testBidMessageStringIntDouble() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link model.BidMessage#getName()}.
+	 */
 	@Test
 	public void testGetName() {
-		test.setName("user");
-		assertEquals("user",test.getName());
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.BidMessage#getId()}.
+	 */
 	@Test
 	public void testGetId() {
-		test.setId(1);
-		assertEquals(1,test.getId());
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.BidMessage#setId(int)}.
+	 */
 	@Test
 	public void testSetId() {
-		test.setId(1);
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.BidMessage#getAmount()}.
+	 */
 	@Test
 	public void testGetAmount() {
-		test.setAmount(1.1);
-		test.getAmount();
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.BidMessage#setAmount(double)}.
+	 */
 	@Test
 	public void testSetAmount() {
-		test.setAmount(1.1);
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.BidMessage#setName(java.lang.String)}.
+	 */
 	@Test
 	public void testSetName() {
-		test.setName("user");
+		fail("Not yet implemented");
 	}
 
 }

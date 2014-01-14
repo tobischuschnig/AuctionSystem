@@ -1,94 +1,111 @@
+/**
+ * 
+ */
 package model.test;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
+import java.util.ArrayList;
+
+import model.Auction;
+import model.User;
+
 import org.junit.Before;
 import org.junit.Test;
-import Client.*;
-import connect.*;
-import model.*;
-import server.*;
 
 /**
- * 
- * @author Kuanlun Huang
- * @version
+ * @author tobi
+ *
  */
 public class UserTest {
-	User test;
+	private User owner;
+
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		test=new User();
+		owner = new User();
+		owner.setActive(true);
+		owner.setAdresse("123");
+		owner.setName("owner");
+		owner.setMessages(new ArrayList<String>());
+		owner.setTcpPort(123);
+		owner.setUdpPort(123);
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
-
+	/**
+	 * Test method for {@link model.User#getName()}.
+	 */
 	@Test
 	public void testGetName() {
-		test.setName("user");
-		assertEquals("user",test.getName());
+		assertEquals(owner.getName(),"owner");
 	}
 
-	@Test
-	public void testSetName() {
-		test.setName("user");
-	}
 
+	/**
+	 * Test method for {@link model.User#getAdresse()}.
+	 */
 	@Test
 	public void testGetAdresse() {
-		test.setAdresse("adresse");
-		assertEquals("adresse",test.getAdresse());
+		assertEquals(owner.getAdresse(),"123");
 	}
 
-	@Test
-	public void testSetAdresse() {
-		test.setAdresse("adresse");
-	}
-
+	/**
+	 * Test method for {@link model.User#getUdpPort()}.
+	 */
 	@Test
 	public void testGetUdpPort() {
-		test.setUdpPort(123);
-		assertEquals(123,test.getUdpPort());
+		assertEquals(owner.getUdpPort(),123);
 	}
 
-	@Test
-	public void testSetUdpPort() {
-		test.setUdpPort(123);
-	}
-
+	/**
+	 * Test method for {@link model.User#getTcpPort()}.
+	 */
 	@Test
 	public void testGetTcpPort() {
-		test.setTcpPort(123);
-		assertEquals(123,test.getTcpPort());
+		assertEquals(owner.getTcpPort(),123);
 	}
 
-	@Test
-	public void testSetTcpPort() {
-		test.setTcpPort(123);
-	}
-
+	/**
+	 * Test method for {@link model.User#isActive()}.
+	 */
 	@Test
 	public void testIsActive() {
-		assertTrue(test.isActive());
+		assertEquals(owner.isActive(),true);
 	}
 
+	/**
+	 * Test method for {@link model.User#setActive(boolean)}.
+	 */
 	@Test
 	public void testSetActive() {
-		test.setActive(true);
+		owner.setActive(false);
+		assertEquals(owner.isActive(),false);
 	}
 
+	/**
+	 * Test method for {@link model.User#getMessages()}.
+	 */
 	@Test
 	public void testGetMessages() {
-		
+		assertEquals(owner.getMessages(),new ArrayList<String>());
 	}
 
+	/**
+	 * Test method for {@link model.User#equals(java.lang.Object)}.
+	 */
 	@Test
-	public void testSetMessages() {
-		
+	public void testEqualsObject() {
+		User owner2 = new User();
+		owner2.setActive(true);
+		owner2.setAdresse("123");
+		owner2.setName("owner2");
+		owner2.setMessages(new ArrayList<String>());
+		owner2.setTcpPort(123);
+		owner2.setUdpPort(123);
+		Boolean bool = owner.equals(owner2);
+		assertEquals(bool,false);
 	}
 
 }

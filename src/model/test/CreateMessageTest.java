@@ -1,62 +1,88 @@
+/**
+ * 
+ */
 package model.test;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import Client.*;
-import connect.*;
-import model.*;
-import server.*;
 
 /**
- * 
- * @author Kuanlun Huang
- * @version
+ * @author tobi
+ *
  */
 public class CreateMessageTest {
-	CreateMessage test;
+
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		test=new CreateMessage();
 	}
 
-	@After
-	public void tearDown() throws Exception {
+	/**
+	 * Test method for {@link model.CreateMessage#CreateMessage()}.
+	 */
+	@Test
+	public void testCreateMessage() {
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.CreateMessage#CreateMessage(java.lang.String, java.lang.String, java.lang.Long)}.
+	 */
+	@Test
+	public void testCreateMessageStringStringLong() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link model.CreateMessage#getName()}.
+	 */
 	@Test
 	public void testGetName() {
-		test.setName("user");
-		assertEquals("user",test.getName());
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.CreateMessage#getDesc()}.
+	 */
 	@Test
 	public void testGetDesc() {
-		test.setDesc("bla");
-		assertEquals("bla",test.getDesc());
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.CreateMessage#setDesc(java.lang.String)}.
+	 */
 	@Test
 	public void testSetDesc() {
-		test.setDesc("bla");
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.CreateMessage#getDuration()}.
+	 */
 	@Test
 	public void testGetDuration() {
-		test.setDuration(10);
-		assertEquals(10,test.getDuration());
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.CreateMessage#setDuration(long)}.
+	 */
 	@Test
 	public void testSetDuration() {
-		test.setDuration(10);
+		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link model.CreateMessage#setName(java.lang.String)}.
+	 */
 	@Test
 	public void testSetName() {
-		test.setName("user");
+		fail("Not yet implemented");
 	}
 
 }
