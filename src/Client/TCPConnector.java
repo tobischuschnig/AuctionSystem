@@ -54,7 +54,8 @@ public class TCPConnector implements Runnable{
 			System.out.println("Could not Connect to Server");
 			return;
 		} catch (IOException e) {
-			System.out.println("Could not open Connection");
+			System.out.println("Could not open Connection\nCheck server and restart");
+			client.setActive(false);
 			return;
 		}
 		t.start();
@@ -110,7 +111,8 @@ public class TCPConnector implements Runnable{
 			s.close();
 			
 		} catch (IOException e) {
-			System.out.println("Problems with Connection");
+			System.out.println("Server unreachable. Check configs and restart");
+			client.setActive(false);
 		}
 	}
 

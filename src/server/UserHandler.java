@@ -44,9 +44,12 @@ public class UserHandler implements Runnable{
 		try {
 			in = new ObjectInputStream( client.getInputStream());
 			out = new ObjectOutputStream(client.getOutputStream());
+			c.setSoTimeout(5000);
 		} catch (IOException e) {
 			System.out.println("Could not Create streams!\nExit");
 			return;
+		}catch(Exception e){
+			return ;
 		}
 		executor = new Thread(this);
 		executor.start();

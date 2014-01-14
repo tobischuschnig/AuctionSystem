@@ -71,7 +71,7 @@ public class ServerBid implements ServerAction {
 					}
 				}
 				else {
-					return "The auctionm '"+server.getAuction().get(i).getDescription()+"' is allready over you can not bid on this auction anymore!";
+					return "The auction '"+server.getAuction().get(i).getDescription()+"' is allready over you can not bid on this auction anymore!";
 				}
 			}
 		}
