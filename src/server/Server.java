@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import connect.Notifier;
 import connect.NotifierFactory;
-import connect.UDPNotifier;
 
 import model.*;
 

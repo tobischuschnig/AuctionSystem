@@ -19,7 +19,7 @@ public class Client{
 	private TaskExecuter t;
 	private TCPConnector tcp;
 	private CLI cli;
-	private NotificationReceiver nr;
+	//private NotificationReceiver nr;
 	private boolean active;
 	/**
 	 * Constructor sets Server-IP,TCP-Port and UDP-Port
@@ -37,7 +37,7 @@ public class Client{
 		cli=new CLI();
 		tcp=new TCPConnector(tcpPort, cli, this);
 		t=new TaskExecuter(this);
-		nr=new NotificationReceiver(this);
+		new NotificationReceiver(this);
 		
 	}
 

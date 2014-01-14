@@ -41,7 +41,7 @@
     </target>
 
     <target name="run-client1" depends="compile" description="Run 1st Client.">
-        <java classname="${client.name}" fork="true" classpathref="project.classpath">
+        <java classname="${client.name}" fork="false" classpathref="project.classpath">
             <arg value="${server.host}"/>
             <arg value="${server.port}"/>
             <arg value="${client1.port}"/>
@@ -49,7 +49,7 @@
     </target>
 
     <target name="run-client2" depends="compile" description="Run 2nd Client.">
-        <java classname="${client.name}" fork="true" classpathref="project.classpath">
+        <java classname="${client.name}" fork="false" classpathref="project.classpath">
             <arg value="${server.host}"/>
             <arg value="${server.port}"/>
             <arg value="${client2.port}"/>
