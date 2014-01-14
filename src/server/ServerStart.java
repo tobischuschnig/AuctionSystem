@@ -4,7 +4,7 @@ import java.util.Scanner;
 import connect.ReceiveConnection;
 /**
  * This class starts a Server with the number of the TCP Port as argument
- * @author Dominik Valka
+ * @author Dominik Valka <dvalka@student.tgm.ac.at>
  * @version 2014-01-13
  */
 public class ServerStart {

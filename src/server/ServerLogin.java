@@ -9,7 +9,7 @@ import model.User;
 /**
  * This class is responsible for a functionality off the server.
  * Is the login server for the users this class is called via the RequestHandler.
- * @author Tobias Schuschnig
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
  * @version 2014-01-05
  */
 public class ServerLogin implements ServerAction {

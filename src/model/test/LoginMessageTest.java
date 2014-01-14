@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author tobi
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
  *
  */
 public class LoginMessageTest {

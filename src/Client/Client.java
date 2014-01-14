@@ -7,7 +7,7 @@ import model.LoginMessage;
 /**
  * This class handles the client input and transfers the commands to the server
  * 
- * @author Dominik Valka
+ * @author Dominik Valka <dvalka@student.tgm.ac.at>
  * @version 2013-12-10
  */
 public class Client{
@@ -118,9 +118,11 @@ public class Client{
 				//If command is logout
 			}else if(eingabe.startsWith("!logout")){
 				if(loggedIn==true){
-					t.logout();
-					loggedIn=false;
 					username="";
+					loggedIn=false;
+					t.logout();
+					
+					
 				}else{
 					cli.out("Logout not possible, not logged in!");
 				}

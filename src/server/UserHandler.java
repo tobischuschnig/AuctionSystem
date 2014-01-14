@@ -18,7 +18,7 @@ import model.User;
  * the Server gets the User from the Server. If the Connection is closed logs out
  * the user automatically
  * 
- * @author Daniel Reichmann
+ * @author Daniel Reichmann <dreichmann@student.tgm.ac.at>
  * @version 10-12-2013
  *
  */
@@ -81,7 +81,6 @@ public class UserHandler implements Runnable{
 						User tmp = new User();
 						tmp.setName(m.getName());
 						user = server.getUser().get(server.getUser().indexOf(tmp));
-						System.out.println(user.getName());
 					}
 				}
 				else{

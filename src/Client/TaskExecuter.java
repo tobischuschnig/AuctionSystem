@@ -9,7 +9,7 @@ import model.*;
  * This class executes all the actions done by the user.
  * This actions are transmitted via the network to the server
  * 
- * @author Dominik Valka
+ * @author Dominik Valka <dvalka@student.tgm.ac.at>
  * @version 2014-01-07
  */
 public class TaskExecuter {

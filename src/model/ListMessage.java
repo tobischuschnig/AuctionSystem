@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * Message which is send when User lists auctions
+ * @author Daniel
+ *
+ */
 public class ListMessage implements Message{
 	private String name;
 	

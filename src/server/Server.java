@@ -10,7 +10,7 @@ import model.*;
 /**
  * The main server with all functionalities and the user data.
  * Has a request method which responds on every request from the client.
- * @author Tobias Schuschnig
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
  * @version 2013-01-05
  */
 public class Server {

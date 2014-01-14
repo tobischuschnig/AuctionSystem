@@ -13,7 +13,7 @@ import model.Message;
 /**
  * Connects from the Client to the server using TCPSockets
  * 
- * @author Daniel Reichman
+ * @author Daniel Reichman <dreichmann@student.tgm.ac.at>
  * @version 2014-01-07
  */
 public class TCPConnector implements Runnable{

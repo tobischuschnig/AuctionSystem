@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * Message which is send when user logs in
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
+ *
+ */
 public class LoginMessage implements Message{
 	private String name;
 	private String adresse;

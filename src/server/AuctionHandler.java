@@ -7,7 +7,7 @@ import model.*;
 
 /**
  * Checks if an Auction is over and notifies the Users about it.
- * @author Tobias Schuschnig
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
  * @version 2013-01-05
  */
 public class AuctionHandler implements Runnable {

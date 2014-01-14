@@ -14,7 +14,7 @@ import model.User;
  * Sends to every User of a given ArrayList a given Message
  * Implements the Notifier Interface.
  * 
- * @author Daniel Reichmann
+ * @author Daniel Reichmann <dreichmann@student.tgm.ac.at>
  * @version 10-12-2013
  */
 public class UDPNotifier implements Notifier{

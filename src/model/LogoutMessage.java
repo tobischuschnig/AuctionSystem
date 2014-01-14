@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * Message which is send when user logs out
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
+ *
+ */
 public class LogoutMessage implements Message{
 	private String name;
 	

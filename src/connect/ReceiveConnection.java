@@ -13,7 +13,7 @@ import server.UserHandler;
  * a Dispatcher Thread (UserHandler)
  * 
  * 
- * @author Daniel Reichmann
+ * @author Daniel Reichmann <dreichmann@student.tgm.ac.at>
  * @version 10-12-2013
  *
  */
@@ -31,6 +31,9 @@ public class ReceiveConnection implements Runnable{
 		server = serv;
 	}
 	
+	/**
+	 * Receives a connection an dispatches it
+	 */
 	@Override
 	public void run(){
 		ServerSocket ss = null;

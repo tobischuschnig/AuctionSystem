@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * Message which is send, when user Creates an auction
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
+ *
+ */
 public class CreateMessage implements Message{
 	private String name;
 	private String desc;

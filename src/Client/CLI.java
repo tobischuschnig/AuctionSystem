@@ -2,7 +2,7 @@ package Client;
 /**
  * This implementation defines the output via standard output
  * 
- * @author Dominik Valka
+ * @author Dominik Valka <dvalka@student.tgm.ac.at>
  * @version 2014-01-07
  */
 public class CLI implements UI{

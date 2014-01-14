@@ -5,7 +5,7 @@ import server.Server;;
 
 /**
  * Interface for all server functionalities
- * @author Tobias Schuschnig
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
  * @version 2013-01-05 
  */
 public interface ServerAction {

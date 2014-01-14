@@ -1,7 +1,11 @@
 package model;
 
 import java.util.ArrayList;
-
+/**
+ * Represents a user and all his important data
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
+ *
+ */
 public class User {
 	private String name;
 	private String adresse;

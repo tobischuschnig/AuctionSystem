@@ -1,7 +1,8 @@
 package Client;
 /**
  * This class starts the client
- * @author Dominik Valka
+ * Ends it when enter is pressed
+ * @author Dominik Valka <dvalka@student.tgm.ac.at>
  * @version 2014-01-09
  */
 public class MainClient {

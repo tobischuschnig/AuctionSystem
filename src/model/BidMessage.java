@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * MEssage which is sent when user bids
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
+ *
+ */
 public class BidMessage implements Message{
 	private String name;
 	private int id;

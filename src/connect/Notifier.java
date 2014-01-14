@@ -6,7 +6,7 @@ import model.User;
 /**
  * Represents methods a Notifer needs to notify Clients
  * 
- * @author Daniel Reichmann
+ * @author Daniel Reichmann <dreichmann@student.tgm.ac.at>
  * @version 2014-01-07
  *
  */

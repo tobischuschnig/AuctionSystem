@@ -1,7 +1,11 @@
 package model;
 
 import java.util.Date;
-
+/**
+ * Saves important data for an auction
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
+ *
+ */
 public class Auction {
 	private int id;
 	private double highestBid;

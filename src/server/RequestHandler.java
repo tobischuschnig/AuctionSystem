@@ -5,7 +5,7 @@ import model.*;
 /**
  * In this class the Request is checked an progressed to the right server where the 
  * functionality is implemented. 
- * @author Tobias Schuschnig
+ * @author Tobias Schuschnig <tschuschnig@student.tgm.ac.at>
  * @version 2013-01-05
  */
 public class RequestHandler {

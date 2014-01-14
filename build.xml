@@ -57,7 +57,7 @@
     </target>
 
     <target name="run-client3" depends="compile" description="Run 3rd Client.">
-        <java classname="${client.name}" fork="true" classpathref="project.classpath">
+        <java classname="${client.name}" fork="false" classpathref="project.classpath">
             <arg value="${server.host}"/>
             <arg value="${server.port}"/>
             <arg value="${client3.port}"/>
@@ -65,7 +65,7 @@
     </target>
 
     <target name="run-client4" depends="compile" description="Run 4th Client.">
-        <java classname="${client.name}" fork="true" classpathref="project.classpath">
+        <java classname="${client.name}" fork="false" classpathref="project.classpath">
             <arg value="${server.host}"/>
             <arg value="${server.port}"/>
             <arg value="${client4.port}"/>
@@ -73,7 +73,7 @@
     </target>
 
     <target name="run-client5" depends="compile" description="Run 5th Client.">
-        <java classname="${client.name}" fork="true" classpathref="project.classpath">
+        <java classname="${client.name}" fork="false" classpathref="project.classpath">
             <arg value="${server.host}"/>
             <arg value="${server.port}"/>
             <arg value="${client5.port}"/>
@@ -81,7 +81,7 @@
     </target>
 
     <target name="run-client6" depends="compile" description="Run 6th Client.">
-        <java classname="${client.name}" fork="true" classpathref="project.classpath">
+        <java classname="${client.name}" fork="false" classpathref="project.classpath">
             <arg value="${server.host}"/>
             <arg value="${server.port}"/>
             <arg value="${client6.port}"/>

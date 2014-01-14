@@ -8,7 +8,7 @@ import java.net.SocketException;
 /**
  * Receive UDP packages and prints it on the ouptu of the Client.
  * 
- * @author Daniel Reichman
+ * @author Daniel Reichmann <dreichmann@student.tgm.ac.at>
  * @version 01-10-2014
  */
 public class NotificationReceiver implements Runnable{
@@ -23,7 +23,9 @@ public class NotificationReceiver implements Runnable{
 		t.start();
 		client = c;
 	}
-
+	/**
+	 * Waits for Notifications from the server
+	 */
 	@Override
 	public void run() {
 		DatagramSocket ds = null;
