@@ -3,8 +3,6 @@ package server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -13,11 +11,12 @@ import model.Message;
 import model.User;
 
 /**
- * Behandelt eine eingehende TCP-Verbindung.
  * 
- * Kann mit anonymem User sein. Wird der Befehl zum Anmelden gegeben, so wird 
- * der User geprueft, ob er bereits existiert und gegebenfalls angelegt.
- * UserHandler muss sich beim Server registrieren.
+ * Handles one TCP Connection with one User. Establishes the connection in own thread
+ * 
+ * User can be anonymous but has the Chance to log himself in. If the user logged in
+ * the Server gets the User from the Server. If the Connection is closed logs out
+ * the user automatically
  * 
  * @author Daniel Reichmann
  * @version 10-12-2013
@@ -25,56 +24,49 @@ import model.User;
  */
 public class UserHandler implements Runnable{
 
-	private String host;
-	private int tcpPort;
 	private Server server;
 	private User user; 
 	private Socket client; //Socket-Verbindung mit Client
 	private boolean active = true;
-	ObjectInputStream in;
-	ObjectOutputStream out;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
 	private Thread executor; //Fuerht die Aktionen durch.
+	
 	/**
+	 * Creates the UserHandler and starts the Connection
 	 * 
+	 * @param c 	Socket which has the connection
+	 * @param s		Server which shall handle the requests
 	 */
 	public UserHandler(Socket c,Server s){
 		client = c;
 		server = s;
-		tcpPort = c.getPort();
+
 		try {
 			in = new ObjectInputStream( client.getInputStream());
 			out = new ObjectOutputStream(client.getOutputStream());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Could not Create streams!\nExit");
+			return;
 		}
-		host = c.getInetAddress().toString();
 		executor = new Thread(this);
 		executor.start();
 	}
 	@Override
 	public void run() {
-		System.out.println("new input");
-				
 		Message m;
-		while(active){
+		while(server.isActive()){
 			Object o = null;
-			try {
-				
+			try {				
 				o = in.readObject();
-				System.out.println("Get object");
 				m = (Message) o;
-//				System.out.println(m.toString());
 			} catch(SocketException e){
 				System.out.println("Connection to Client lost.");
 				break;
 			}
 			catch (ClassNotFoundException e) {
-				// TODO Auto-generatedcatch block
-				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
 			}
 			
 			if(o instanceof Message){
@@ -104,8 +96,10 @@ public class UserHandler implements Runnable{
 		}
 		try {
 			client.close();
-			if(user.isActive())
-				user.setActive(false);
+			//Finally log out User
+			if(user!=null)
+				if(user.isActive())
+					user.setActive(false);
 		} catch (IOException e) {
 			System.out.println("Could not close client");
 		}

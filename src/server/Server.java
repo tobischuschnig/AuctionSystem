@@ -23,6 +23,7 @@ public class Server {
 	private AuctionHandler ahandler;
 	private RequestHandler rhandler; 
 	private Notifier udp;
+	private boolean active;
 	
 	/**
 	 * Der Standardkonstruktor hier werden alle Attribute die spaeter verwendet werden
@@ -125,5 +126,10 @@ public class Server {
 	 */
 	public void setTodo(String todo) {
 		this.todo = todo;
+	}
+
+	public boolean isActive() {
+
+		return active;
 	}
 }

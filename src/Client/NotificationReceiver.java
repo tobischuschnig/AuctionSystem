@@ -5,9 +5,19 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
+/**
+ * Receive UDP packages and prints it on the ouptu of the Client.
+ * 
+ * @author Daniel Reichman
+ * @version 01-10-2014
+ */
 public class NotificationReceiver implements Runnable{
 	private Client client;
 	
+	/**
+	 * Creates the Receiver and starts receiving
+	 * @param c	Client where the output is
+	 */
 	public NotificationReceiver(Client c){
 		Thread t = new Thread(this);
 		t.start();
@@ -24,9 +34,8 @@ public class NotificationReceiver implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		while(true){
+		while(client.isActive()){
 			byte[] buf = new byte[1024];
-			System.out.println("receie");
 			DatagramPacket p=new DatagramPacket(buf, buf.length);
 			try {
 				ds.receive(p);
@@ -37,8 +46,6 @@ public class NotificationReceiver implements Runnable{
 			}
 			
 		}
-		
-	}
-
-	
+		ds.close();
+	}	
 }

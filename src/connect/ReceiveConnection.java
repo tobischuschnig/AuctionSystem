@@ -8,9 +8,9 @@ import server.Server;
 import server.UserHandler;
 
 /**
- * Wartet auf eingehende Verbindungen zum Server.
- * Bekommt er eine Verbindung, so leitet er diese an einen neuen Thread weiter (UserHandler)
- * Dieser ist fortan für die Verbindung verantwortlich.
+ * WWaits for incoming TCP Connections.
+ * If a Connection is established, the server forwards to Socket to
+ * a Dispatcher Thread (UserHandler)
  * 
  * 
  * @author Daniel Reichmann
@@ -22,15 +22,17 @@ public class ReceiveConnection implements Runnable{
 	private int tcpPort;
 	private boolean listen = true;
 	
+	/**
+	 * Constructor
+	 * @param tcp		TCP Port 
+	 * @param serv		Server
+	 */
 	public ReceiveConnection(int tcp, Server serv){
 		tcpPort = tcp;
 		server = serv;
 	}
 	
-	/**
-	 * Wartet auf eingehende Verbindungen.
-	 * Wird eine Verbindung aufgenommen, so wird diese an einen UserHandler weitergeleitet
-	 */
+	@Override
 	public void run(){
 		ServerSocket ss = null;
 		try {
@@ -45,17 +47,11 @@ public class ReceiveConnection implements Runnable{
 			try {
 				client = ss.accept();
 								
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (IOException e) {			}
 			new UserHandler(client, server);
 		}
 		try {
 			ss.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (IOException e) {		}
 	}
 }

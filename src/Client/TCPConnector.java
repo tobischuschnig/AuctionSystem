@@ -25,16 +25,16 @@ import model.Message;
 public class TCPConnector implements Runnable{
 	
 	int tcpPort;
-	Message message; //Message die gesendet werden soll
-	Socket s;
-	ReentrantLock lock = new ReentrantLock();
-	Condition con; //Thread wait until message is set
-	Thread t; //Thread in  dem das Programm läuft
+	private Message message; //Message to be sent
+	private Socket s; //Connection to Server
+	private ReentrantLock lock = new ReentrantLock(); //To lock specific actions
+	private Condition con; //Thread wait until message is set
+	private Thread t; //Thread in which program is running
 	//Fehlt Objekt für Ausgabe
-	ObjectOutputStream objectOutput; //Strem for Output
-	ObjectInputStream input; //Stream for Input
+	private ObjectOutputStream objectOutput; //Strem for Output
+	private ObjectInputStream input; //Stream for Input
 	UI ui; //Output into CLI/GUI
-	Client client;
+	Client client; //Client
 	
 	public TCPConnector(int p, UI ui,Client c){
 		tcpPort = p;
@@ -51,16 +51,17 @@ public class TCPConnector implements Runnable{
 			input = new ObjectInputStream(s.getInputStream());
 			objectOutput.writeObject(null); //Initialise stream
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Could not Connect to Server");
+			return;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Could not open Connection");
+			return;
 		}
 		t.start();
 	}
 	/**
-	 * Übergeben der Message
+	 * Gives the Connector a message to send to the server
+	 * Notifies the Thread that it has to work
 	 */
 	public void sendMessage(Message m){
 		lock.lock();
@@ -72,16 +73,18 @@ public class TCPConnector implements Runnable{
 	@Override
 	public void run() {
 		try {			
-			while(true){
+			while(client.isActive()){
 				try{
 					lock.lock();
-					System.out.println("Senden initiiert");	
+					//Wait if message is null
 					if(message==null){
 						try {
-							con.await();							
+							//Wait until sendMessage is called
+							con.await();						
+							if(!client.isActive())
+								break;
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							//Could not wait
 						}
 					}
 					objectOutput.writeObject(message);					 
@@ -97,8 +100,7 @@ public class TCPConnector implements Runnable{
 						}
 						ui.out(s);
 					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						
 					}
 					
 					message=null;
@@ -106,13 +108,10 @@ public class TCPConnector implements Runnable{
 					lock.unlock();
 				}
 			}
+			s.close();
 			
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Problems with Connection");
 		}
 	}
 

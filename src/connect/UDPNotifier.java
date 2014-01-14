@@ -11,14 +11,20 @@ import java.util.ArrayList;
 import model.User;
 
 /**
- * Schickt an alle User aus einer ArrayList eine Nachricht.
- * Versenden passiert mittels UDP-Paketen.
+ * Sends to every User of a given ArrayList a given Message
+ * Implements the Notifier Interface.
  * 
  * @author Daniel Reichmann
  * @version 10-12-2013
  */
 public class UDPNotifier implements Notifier{
 	
+	/**
+	 * Sends the Notifications via UDP
+	 * 
+	 * @param al	User which shall receive the package
+	 * @param message	Message which shall be send
+	 */
 	public void notify(ArrayList<User> al, String message){
 		DatagramSocket ds;
 		byte[] buf = message.getBytes();
@@ -26,7 +32,6 @@ public class UDPNotifier implements Notifier{
 		for (User user : al) {
 			try {
 				if(user.isActive()){
-					System.out.println("send" + user.getAdresse()+":"+user.getUdpPort());
 					ds = new DatagramSocket();
 					InetAddress address = InetAddress.getByName(user.getAdresse());
 					dp = new DatagramPacket(buf, buf.length, address,user.getUdpPort());
@@ -34,19 +39,12 @@ public class UDPNotifier implements Notifier{
 				}
 				else{
 						user.getMessages().add(message);
-						System.out.println(message);
 					}
 				
-			} catch (SocketException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (UnknownHostException e) {
+			} catch (SocketException e) {} catch (UnknownHostException e) {
 				System.out.println("Hostname could not be resolved");
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (IOException e) {
 				System.out.println("Could not send Paket");
-				e.printStackTrace();
 			}
 		}
 	}
