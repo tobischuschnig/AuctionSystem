@@ -1,0 +1,11 @@
+Testsuite: model.test.UserTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,011 sec
+
+Testcase: testGetTcpPort took 0 sec
+Testcase: testGetAdresse took 0 sec
+Testcase: testGetName took 0,001 sec
+Testcase: testGetUdpPort took 0 sec
+Testcase: testEqualsObject took 0 sec
+Testcase: testIsActive took 0 sec
+Testcase: testSetActive took 0 sec
+Testcase: testGetMessages took 0 sec

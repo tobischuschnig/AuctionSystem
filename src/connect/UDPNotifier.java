@@ -37,7 +37,7 @@ public class UDPNotifier implements Notifier{
 		DatagramPacket dp = new DatagramPacket(buf, buf.length);
 		for (User user : al) {
 			try {
-				System.out.println("User: "+user.getName() + user.isActive());
+				
 				if(user.isActive()){
 					ds = new DatagramSocket();
 					InetAddress address = InetAddress.getByName(user.getAdresse());

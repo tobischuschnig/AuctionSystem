@@ -1,0 +1,16 @@
+Testsuite: model.test.AuctionTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,065 sec
+
+Testcase: testGetOwner took 0,005 sec
+Testcase: testGetId took 0 sec
+Testcase: testSetId took 0 sec
+Testcase: testSetDescription took 0 sec
+Testcase: testSetLastUser took 0 sec
+Testcase: testGetLastUser took 0 sec
+Testcase: testIsActive took 0 sec
+Testcase: testSetFinished took 0 sec
+Testcase: testGetDescription took 0 sec
+Testcase: testSetDeadline took 0 sec
+Testcase: testGetDeadline took 0 sec
+Testcase: testIsFinished took 0 sec
+Testcase: testSetOwner took 0 sec

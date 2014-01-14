@@ -1,0 +1,23 @@
+Testsuite: server.test.ServerTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,136 sec
+------------- Standard Output ---------------
+User: nametrue
+An auction 'laptop' with the ID: 0 has been created and will end on Tue Jan 14 17:00:18 CET 2014.
+User: nametrue
+An auction 'laptop' with the ID: 0 has been created and will end on Tue Jan 14 17:00:18 CET 2014.
+User: name1true
+You have been overbid on 'laptop' with the ID: 0.
+User: nametrue
+An auction 'laptop' with the ID: 0 has been created and will end on Tue Jan 14 17:00:18 CET 2014.
+------------- ---------------- ---------------
+
+Testcase: testRequestLogin took 0,018 sec
+Testcase: testRequestCreate took 0,031 sec
+Testcase: testRequestLogout took 0,004 sec
+Testcase: testGetTcpPort took 0,001 sec
+Testcase: testRequestBid took 0,065 sec
+Testcase: testIsActive took 0,001 sec
+Testcase: testRequestList took 0,004 sec
+Testcase: testSetTcpPort took 0,001 sec
+Testcase: testSetUser took 0 sec
+Testcase: testSetAuction took 0 sec

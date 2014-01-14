@@ -1,0 +1,51 @@
+Testsuite: model.test.BidMessageTest
+Tests run: 8, Failures: 8, Errors: 0, Skipped: 0, Time elapsed: 0,088 sec
+
+Testcase: testGetId took 0,005 sec
+	FAILED
+Not yet implemented
+junit.framework.AssertionFailedError: Not yet implemented
+	at model.test.BidMessageTest.testGetId(BidMessageTest.java:55)
+
+Testcase: testSetId took 0 sec
+	FAILED
+Not yet implemented
+junit.framework.AssertionFailedError: Not yet implemented
+	at model.test.BidMessageTest.testSetId(BidMessageTest.java:63)
+
+Testcase: testGetName took 0 sec
+	FAILED
+Not yet implemented
+junit.framework.AssertionFailedError: Not yet implemented
+	at model.test.BidMessageTest.testGetName(BidMessageTest.java:47)
+
+Testcase: testBidMessageStringIntDouble took 0,001 sec
+	FAILED
+Not yet implemented
+junit.framework.AssertionFailedError: Not yet implemented
+	at model.test.BidMessageTest.testBidMessageStringIntDouble(BidMessageTest.java:39)
+
+Testcase: testSetAmount took 0 sec
+	FAILED
+Not yet implemented
+junit.framework.AssertionFailedError: Not yet implemented
+	at model.test.BidMessageTest.testSetAmount(BidMessageTest.java:79)
+
+Testcase: testGetAmount took 0 sec
+	FAILED
+Not yet implemented
+junit.framework.AssertionFailedError: Not yet implemented
+	at model.test.BidMessageTest.testGetAmount(BidMessageTest.java:71)
+
+Testcase: testBidMessage took 0,001 sec
+	FAILED
+Not yet implemented
+junit.framework.AssertionFailedError: Not yet implemented
+	at model.test.BidMessageTest.testBidMessage(BidMessageTest.java:31)
+
+Testcase: testSetName took 0 sec
+	FAILED
+Not yet implemented
+junit.framework.AssertionFailedError: Not yet implemented
+	at model.test.BidMessageTest.testSetName(BidMessageTest.java:87)
+
