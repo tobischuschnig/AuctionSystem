@@ -118,9 +118,9 @@ public class Client{
 				//If command is logout
 			}else if(eingabe.startsWith("!logout")){
 				if(loggedIn==true){
+					t.logout();
 					username="";
 					loggedIn=false;
-					t.logout();
 					
 					
 				}else{
