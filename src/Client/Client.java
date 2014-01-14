@@ -2,6 +2,8 @@ package Client;
 
 import java.util.Scanner;
 
+import model.LoginMessage;
+
 /**
  * This class handles the client input and transfers the commands to the server
  * 
@@ -9,18 +11,16 @@ import java.util.Scanner;
  * @version 2013-12-10
  */
 public class Client{
-	String username;
-	boolean loggedIn;
-	String host;
-	int tcpPort;
-	int udpPort;
-	String eingabe;
-	Scanner in;
-	TaskExecuter t;
-	TCPConnector tcp;
-	CLI cli;
-	NotificationReceiver nr;
-	boolean active;
+	private String username;
+	private boolean loggedIn;
+	private String host;
+	private int tcpPort;
+	private int udpPort;
+	private TaskExecuter t;
+	private TCPConnector tcp;
+	private CLI cli;
+	//private NotificationReceiver nr;
+	private boolean active;
 	/**
 	 * Constructor sets Server-IP,TCP-Port and UDP-Port
 	 * @param host
@@ -28,7 +28,7 @@ public class Client{
 	 * @param udpPort
 	 */
 	public Client(String host,int tcpPort,int udpPort){
-		eingabe="";
+		active=true;
 		loggedIn=false;
 		username="";
 		this.host=host;
@@ -37,8 +37,8 @@ public class Client{
 		cli=new CLI();
 		tcp=new TCPConnector(tcpPort, cli, this);
 		t=new TaskExecuter(this);
-		nr=new NotificationReceiver(this);
-		active=true;
+		new NotificationReceiver(this);
+		
 	}
 
 	
@@ -46,9 +46,11 @@ public class Client{
 	 * Reads permantly the user input and calls the methods
 	 */
 	public void run() {
+		String eingabe="";
+		Scanner in;
 		in=new Scanner(System.in);
 		while(active){
-			cli.outln(username+"> ");
+			cli.outln("\n"+username+"> ");
 			eingabe=in.nextLine();	//The current command saved as String
 			
 			if(eingabe.startsWith(" ")) eingabe=eingabe.substring(1);
@@ -67,7 +69,14 @@ public class Client{
 					String[] werte=eingabe.split(" ");
 					if(werte.length==3){
 						try{
-							t.bid(Integer.parseInt(werte[1]),Double.parseDouble(werte[2]));
+							String[] ab=werte[2].split("\\.");
+							if(werte[2].contains(".")&&ab[0].length()>7){
+								werte[2]=ab[0].substring(ab[0].length()-7)+"."+ab[1];
+								System.out.println("Too large amount, max 7 numbers before '.'");
+							}
+							double erg=Double.parseDouble(werte[2]);
+							erg=Math.rint(erg*100)/100;
+							t.bid(Integer.parseInt(werte[1]),erg);
 						}catch(NumberFormatException e){
 							cli.out("ID or Amount entered incorrect");
 						}
@@ -120,6 +129,7 @@ public class Client{
 			}else if(eingabe.startsWith("!end")){
 				in.close();	//Free ressources
 				active=false;		//Exits the loop
+				tcp.sendMessage(new LoginMessage());//Tell TCP something is new
 				//TcpConnector isActive:false, NotificationReceiver isActive:false
 			}
 				//If command is not recognized, another try will be granted
@@ -134,7 +144,6 @@ public class Client{
 		}
 	}
 	public TCPConnector getTcp() {
-		System.out.println("getMethode");
 		return tcp;
 	}
 	public String getUsername() {
@@ -160,5 +169,8 @@ public class Client{
 	}
 	public boolean isActive() {
 		return active;
+	}
+	public void setActive(boolean active) {
+		this.active=active;
 	}
 }

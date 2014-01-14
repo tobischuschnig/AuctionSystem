@@ -28,9 +28,10 @@ public class AuctionHandler implements Runnable {
 	 */
 	@Override
 	public void run() {
-		while(true) {
+		while(server.isActive()) {
 			Date now = new Date();
 			//System.out.println(now);
+			try{
 			for(int i=0;i< server.getAuction().size();i++) { //Goes through all auctions
 				//Checks if the auction is over
 				if(server.getAuction().get(i).getDeadline().compareTo(now) <= 0 && 
@@ -76,6 +77,9 @@ public class AuctionHandler implements Runnable {
 								+server.getAuction().get(i).getDescription()+"' has ended. Nobody bidded.");
 					}
 				}
+			}
+			}catch(Exception e){
+				//Error has no consequences in the programm -> no action
 			}
 		}
 	}

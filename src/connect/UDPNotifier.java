@@ -26,11 +26,18 @@ public class UDPNotifier implements Notifier{
 	 * @param message	Message which shall be send
 	 */
 	public void notify(ArrayList<User> al, String message){
-		DatagramSocket ds;
+		
+		DatagramSocket ds=null;
+		try {
+			ds=new DatagramSocket();
+			ds.setSoTimeout(5000);
+		} catch (SocketException e1) {
+		}
 		byte[] buf = message.getBytes();
 		DatagramPacket dp = new DatagramPacket(buf, buf.length);
 		for (User user : al) {
 			try {
+				System.out.println("User: "+user.getName() + user.isActive());
 				if(user.isActive()){
 					ds = new DatagramSocket();
 					InetAddress address = InetAddress.getByName(user.getAdresse());

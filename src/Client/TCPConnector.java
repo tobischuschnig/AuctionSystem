@@ -1,18 +1,12 @@
 package Client;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Reader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-
-import com.sun.org.apache.xerces.internal.impl.io.UTF8Reader;
-
 import model.LoginMessage;
 import model.Message;
 
@@ -31,7 +25,7 @@ public class TCPConnector implements Runnable{
 	private Condition con; //Thread wait until message is set
 	private Thread t; //Thread in which program is running
 	//Fehlt Objekt für Ausgabe
-	private ObjectOutputStream objectOutput; //Strem for Output
+	private ObjectOutputStream objectOutput; //Stream for Output
 	private ObjectInputStream input; //Stream for Input
 	UI ui; //Output into CLI/GUI
 	Client client; //Client
@@ -44,17 +38,18 @@ public class TCPConnector implements Runnable{
 		t = new Thread(this);
 		client=c;
 		
-		System.out.println("Connector started");
 		try {
 			s = new Socket(c.getHost(),tcpPort);
 			objectOutput = new ObjectOutputStream(s.getOutputStream());
 			input = new ObjectInputStream(s.getInputStream());
-			objectOutput.writeObject(null); //Initialise stream
+			objectOutput.writeObject(null); //Initialize stream
+			ui.out("Connector started");
 		} catch (UnknownHostException e) {
 			System.out.println("Could not Connect to Server");
 			return;
 		} catch (IOException e) {
-			System.out.println("Could not open Connection");
+			System.out.println("Could not open Connection\nCheck server and restart");
+			client.setActive(false);
 			return;
 		}
 		t.start();
@@ -94,7 +89,6 @@ public class TCPConnector implements Runnable{
 						if(message instanceof LoginMessage){
 							if(s.contains("Successfully")){
 								client.setLoggedIn(true);
-								System.out.println(message.getName());
 								client.setUsername(message.getName());
 							}
 						}
@@ -111,7 +105,8 @@ public class TCPConnector implements Runnable{
 			s.close();
 			
 		} catch (IOException e) {
-			System.out.println("Problems with Connection");
+			System.out.println("Server unreachable. Check configs and restart");
+			client.setActive(false);
 		}
 	}
 

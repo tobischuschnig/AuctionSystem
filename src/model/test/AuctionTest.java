@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package model.test;
 
 import static org.junit.Assert.*;
@@ -5,118 +8,161 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.junit.After;
+import model.Auction;
+import model.User;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import Client.*;
-import connect.*;
-import model.*;
-import server.*;
-
 /**
- * 
- * @author Kuanlun Huang
- * @version
+ * @author tobi
+ *
  */
 public class AuctionTest {
-	Auction test;
-	User tuser;
+	private Auction auction;
+	
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		tuser=new User();
-		tuser.setActive(false);
-		tuser.setName("user");
-		tuser.setMessages(new ArrayList<String>());
-		tuser.setTcpPort(123);
-		tuser.setUdpPort(123);
-		
-		test=new Auction(tuser,"bla",(long)100);
+		User owner = new User();
+		owner.setActive(true);
+		owner.setAdresse("123");
+		owner.setName("owner");
+		owner.setMessages(new ArrayList<String>());
+		owner.setTcpPort(123);
+		owner.setUdpPort(123);
+		auction = new Auction(owner,"auction",10L);
+		auction = new Auction(owner,"auction",10L,0);
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
-
+	/**
+	 * Test method for {@link model.Auction#isActive()}.
+	 */
 	@Test
 	public void testIsActive() {
-		assertFalse(test.isActive());
+		assertEquals(auction.isActive(),false);
 	}
 
-	@Test
-	public void testBid() {
-		assertFalse(test.bid(tuser,10));
-	}
-
+	/**
+	 * Test method for {@link model.Auction#getId()}.
+	 */
 	@Test
 	public void testGetId() {
-		test.setId(10);
-		assertEquals(10,test.getId());
+		assertEquals(auction.getId(),0);
 	}
 
+	/**
+	 * Test method for {@link model.Auction#setId(int)}.
+	 */
 	@Test
 	public void testSetId() {
-		test.setId(10);
+		auction.setId(1);
+		assertEquals(auction.getId(),1);
 	}
 
-	@Test
-	public void testGetHighestBid() {
-		test.setHighestBid(10.01);
-		test.getHighestBid();
-		
-	}
 
-	@Test
-	public void testSetHighestBid() {
-		test.setHighestBid(10);
-	}
-
+	/**
+	 * Test method for {@link model.Auction#getLastUser()}.
+	 */
 	@Test
 	public void testGetLastUser() {
-		test.setLastUser(tuser);
-		assertEquals(tuser,test.getLastUser());
-		
+		assertEquals(auction.getLastUser(),null);
 	}
 
+	/**
+	 * Test method for {@link model.Auction#setLastUser(model.User)}.
+	 */
 	@Test
 	public void testSetLastUser() {
-		test.setLastUser(tuser);
+		User lastuser = new User();
+		lastuser.setActive(true);
+		lastuser.setAdresse("123");
+		lastuser.setMessages(new ArrayList<String>());
+		lastuser.setName("lastUser");
+		lastuser.setTcpPort(123);
+		lastuser.setUdpPort(123);
+		auction.setLastUser(lastuser);
+		assertEquals(auction.getLastUser(),lastuser);
 	}
 
+	/**
+	 * Test method for {@link model.Auction#getOwner()}.
+	 */
 	@Test
 	public void testGetOwner() {
-		test.setOwner(tuser);
-		assertEquals(tuser,test.getOwner());
+		assertEquals(auction.getOwner().getName(),"owner");
 	}
 
+	/**
+	 * Test method for {@link model.Auction#setOwner(model.User)}.
+	 */
 	@Test
 	public void testSetOwner() {
-		test.setOwner(tuser);
+		User owner = new User();
+		owner.setActive(true);
+		owner.setAdresse("123");
+		owner.setName("owner2");
+		owner.setMessages(new ArrayList<String>());
+		owner.setTcpPort(123);
+		owner.setUdpPort(123);
+		auction.setOwner(owner);
+		assertEquals(auction.getOwner().getName(),"owner2");
 	}
 
+	/**
+	 * Test method for {@link model.Auction#getDescription()}.
+	 */
 	@Test
 	public void testGetDescription() {
-		test.setDescription("bla");
-		assertEquals("bla",test.getDescription());
+		assertEquals(auction.getDescription(), "auction");
 	}
 
+	/**
+	 * Test method for {@link model.Auction#setDescription(java.lang.String)}.
+	 */
 	@Test
 	public void testSetDescription() {
-		test.setDescription("bla");
+		auction.setDescription("auction2");
+		assertEquals(auction.getDescription(),"auction2");
 	}
 
+	/**
+	 * Test method for {@link model.Auction#getDeadline()}.
+	 */
 	@Test
 	public void testGetDeadline() {
-		Date a=new Date();
-		test.setDeadline(a);
-		assertEquals(a,test.getDeadline());
+		Date date = auction.getDeadline();
+		assertEquals(auction.getDeadline(),date);
 	}
 
+	/**
+	 * Test method for {@link model.Auction#setDeadline(java.util.Date)}.
+	 */
 	@Test
 	public void testSetDeadline() {
-		Date a=new Date();
-		test.setDeadline(a);
+		auction.setDeadline(auction.getDeadline());
+		Date date = auction.getDeadline();
+		assertEquals(auction.getDeadline(),date);
+	}
+
+	/**
+	 * Test method for {@link model.Auction#isFinished()}.
+	 */
+	@Test
+	public void testIsFinished() {
+		auction.setFinished(true);
+		assertEquals(auction.isFinished(),true);
+	}
+
+	/**
+	 * Test method for {@link model.Auction#setFinished(boolean)}.
+	 */
+	@Test
+	public void testSetFinished() {
+		auction.setFinished(true);
+		assertEquals(auction.isFinished(),true);;
 	}
 
 }

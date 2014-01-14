@@ -7,4 +7,5 @@ package Client;
  */
 public interface UI {
 	public void out(String output);
+	public void outln(String output);
 }

@@ -27,7 +27,6 @@ public class UserHandler implements Runnable{
 	private Server server;
 	private User user; 
 	private Socket client; //Socket-Verbindung mit Client
-	private boolean active = true;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 	private Thread executor; //Fuerht die Aktionen durch.
@@ -45,9 +44,12 @@ public class UserHandler implements Runnable{
 		try {
 			in = new ObjectInputStream( client.getInputStream());
 			out = new ObjectOutputStream(client.getOutputStream());
+			c.setSoTimeout(5000);
 		} catch (IOException e) {
 			System.out.println("Could not Create streams!\nExit");
 			return;
+		}catch(Exception e){
+			return ;
 		}
 		executor = new Thread(this);
 		executor.start();
@@ -77,7 +79,7 @@ public class UserHandler implements Runnable{
 					ret = server.request(m);
 					if(ret.startsWith("Successfully")){
 						User tmp = new User();
-						tmp.setName(m.getName());;
+						tmp.setName(m.getName());
 						user = server.getUser().get(server.getUser().indexOf(tmp));
 						System.out.println(user.getName());
 					}
@@ -88,8 +90,7 @@ public class UserHandler implements Runnable{
 				try {
 					out.writeObject(ret);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
 				}
 				
 			}

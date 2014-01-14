@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import connect.Notifier;
 import connect.NotifierFactory;
-import connect.UDPNotifier;
 
 import model.*;
 
@@ -19,20 +18,18 @@ public class Server {
 	private int tcpPort;
 	private ArrayList<User> user;
 	private ArrayList<Auction> auction;
-	private String todo; //TODO considered useless with the now strategy 
 	private AuctionHandler ahandler;
 	private RequestHandler rhandler; 
 	private Notifier udp;
 	private boolean active;
 	
 	/**
-	 * Der Standardkonstruktor hier werden alle Attribute die spaeter verwendet werden
-	 * initialisiert.
 	 * The standard konstructor where are all attributes are set up and the attributes are
 	 * initialised.
 	 */
 	public Server() {
 		user=new ArrayList<User>();
+		active = true;
 		auction=new ArrayList<Auction>();
 		ahandler = new AuctionHandler(this);
 		rhandler = new RequestHandler();
@@ -62,8 +59,7 @@ public class Server {
 		System.out.println(message); //TODO only for testing after that delete
 	}
 	
-	
-	
+
 	
 	/**
 	 * @return the tcpPort
@@ -113,23 +109,11 @@ public class Server {
 	}
 
 
-	/**
-	 * @return the todo
-	 */
-	public String getTodo() {
-		return todo;
-	}
-
-
-	/**
-	 * @param todo the todo to set
-	 */
-	public void setTodo(String todo) {
-		this.todo = todo;
-	}
-
 	public boolean isActive() {
 
 		return active;
+	}
+	public void setActive(boolean active){
+		this.active=active;
 	}
 }

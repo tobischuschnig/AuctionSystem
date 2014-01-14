@@ -20,7 +20,6 @@ import server.UserHandler;
 public class ReceiveConnection implements Runnable{
 	private Server server;
 	private int tcpPort;
-	private boolean listen = true;
 	
 	/**
 	 * Constructor
@@ -37,12 +36,14 @@ public class ReceiveConnection implements Runnable{
 		ServerSocket ss = null;
 		try {
 			ss = new ServerSocket(tcpPort);
+			ss.setSoTimeout(5000);
 		} catch (IOException e) {
-			System.out.println("Could not listen on specififc port");
-			e.printStackTrace();
+			System.out.println("Could not listen on specififc port\nExit with enter.");
+			server.setActive(false);
+			return;
 		}
-		while(listen){
-			System.out.println("Ready to Listen");
+		System.out.println("Server is listening");
+		while(server.isActive()){
 			Socket client = null;
 			try {
 				client = ss.accept();
@@ -51,7 +52,8 @@ public class ReceiveConnection implements Runnable{
 			new UserHandler(client, server);
 		}
 		try {
-			ss.close();
+			if(ss!=null)
+				ss.close();
 		} catch (IOException e) {		}
 	}
 }
