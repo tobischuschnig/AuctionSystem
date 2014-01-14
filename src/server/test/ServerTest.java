@@ -213,7 +213,7 @@ public class ServerTest {
 	 */
 	@Test
 	public void testGetTcpPort() {
-		assertEquals(server.getTcpPort(),null);
+		assertEquals(server.getTcpPort(),0);
 	}
 
 	/**
@@ -257,7 +257,8 @@ public class ServerTest {
 	 */
 	@Test
 	public void testIsActive() {
-		fail("Not yet implemented");
+		server.setActive(true);
+		assertEquals(server.isActive(),true);
 	}
 
 }
