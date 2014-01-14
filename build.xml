@@ -111,4 +111,9 @@
     </target>
 
     <target name="rebuild" depends="clean, compile" description="Clean and build prject."/>
+	<target name="jar" description="Create new jar"> 
+	<jar destfile="lib/app.jar" basedir="${build.dir}"> 
+	<manifest> <attribute name="Main-Class" value="Client.MainClient"/> 
+	</manifest> </jar> 
+	</target>
 </project>
