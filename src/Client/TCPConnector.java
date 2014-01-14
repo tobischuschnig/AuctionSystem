@@ -44,12 +44,12 @@ public class TCPConnector implements Runnable{
 		t = new Thread(this);
 		client=c;
 		
-		System.out.println("Connector started");
 		try {
 			s = new Socket(c.getHost(),tcpPort);
 			objectOutput = new ObjectOutputStream(s.getOutputStream());
 			input = new ObjectInputStream(s.getInputStream());
-			objectOutput.writeObject(null); //Initialise stream
+			objectOutput.writeObject(null); //Initialize stream
+			ui.out("Connector started");
 		} catch (UnknownHostException e) {
 			System.out.println("Could not Connect to Server");
 			return;
@@ -94,7 +94,6 @@ public class TCPConnector implements Runnable{
 						if(message instanceof LoginMessage){
 							if(s.contains("Successfully")){
 								client.setLoggedIn(true);
-								System.out.println(message.getName());
 								client.setUsername(message.getName());
 							}
 						}

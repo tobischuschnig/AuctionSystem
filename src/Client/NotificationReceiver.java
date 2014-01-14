@@ -29,20 +29,19 @@ public class NotificationReceiver implements Runnable{
 		DatagramSocket ds = null;
 		try {
 			ds = new DatagramSocket(client.getUdpPort());
+			ds.setSoTimeout(5000);
 			//System.out.println(client.getUdpPort());
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Could not open socket");
 		}
 		while(client.isActive()){
 			byte[] buf = new byte[1024];
 			DatagramPacket p=new DatagramPacket(buf, buf.length);
 			try {
 				ds.receive(p);
-				client.getCli().out(new String(p.getData()).trim());
+				client.getCli().outln("\n"+new String(p.getData()).trim()+"\n"+client.getUsername()+"> ");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//Timeout
 			}
 			
 		}

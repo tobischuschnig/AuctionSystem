@@ -33,11 +33,16 @@ public class ServerBid implements ServerAction {
 		if (bidder == null) { //If the user doesn't exists the operation is canceled
 			return "This User doesn't exists!";
 		}
+		
+		
 
 		for(int i=0;i< server.getAuction().size();i++) {
 			if(bid.getId() == server.getAuction().get(i).getId()) {
 				if(server.getAuction().get(i).isFinished() == false) {
-					if(server.getAuction().get(i).getHighestBid() < bid.getAmount() ) { //checks if the bid is higher and if the auction is over
+					if(server.getAuction().get(i).getOwner().getName().equals(bid.getName())){
+						return "You cannot bid on your own auction!";
+					}
+					else if(server.getAuction().get(i).getHighestBid() < bid.getAmount() ) { //checks if the bid is higher and if the auction is over
 						User lastUser;
 						Auction hilf = server.getAuction().get(i);
 						hilf.setHighestBid(bid.getAmount());

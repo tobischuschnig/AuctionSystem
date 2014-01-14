@@ -27,7 +27,6 @@ public class UserHandler implements Runnable{
 	private Server server;
 	private User user; 
 	private Socket client; //Socket-Verbindung mit Client
-	private boolean active = true;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 	private Thread executor; //Fuerht die Aktionen durch.
@@ -79,7 +78,7 @@ public class UserHandler implements Runnable{
 						User tmp = new User();
 						tmp.setName(m.getName());;
 						user = server.getUser().get(server.getUser().indexOf(tmp));
-						System.out.println(user.getName());
+						//System.out.println(user.getName());
 					}
 				}
 				else{
@@ -88,8 +87,7 @@ public class UserHandler implements Runnable{
 				try {
 					out.writeObject(ret);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
 				}
 				
 			}

@@ -2,6 +2,8 @@ package Client;
 
 import java.util.Scanner;
 
+import model.LoginMessage;
+
 /**
  * This class handles the client input and transfers the commands to the server
  * 
@@ -26,6 +28,7 @@ public class Client{
 	 * @param udpPort
 	 */
 	public Client(String host,int tcpPort,int udpPort){
+		active=true;
 		loggedIn=false;
 		username="";
 		this.host=host;
@@ -35,7 +38,7 @@ public class Client{
 		tcp=new TCPConnector(tcpPort, cli, this);
 		t=new TaskExecuter(this);
 		nr=new NotificationReceiver(this);
-		active=true;
+		
 	}
 
 	
@@ -126,6 +129,7 @@ public class Client{
 			}else if(eingabe.startsWith("!end")){
 				in.close();	//Free ressources
 				active=false;		//Exits the loop
+				tcp.sendMessage(new LoginMessage());//Tell TCP something is new
 				//TcpConnector isActive:false, NotificationReceiver isActive:false
 			}
 				//If command is not recognized, another try will be granted
@@ -140,7 +144,6 @@ public class Client{
 		}
 	}
 	public TCPConnector getTcp() {
-		System.out.println("getMethode");
 		return tcp;
 	}
 	public String getUsername() {
