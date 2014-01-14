@@ -67,7 +67,14 @@ public class Client{
 					String[] werte=eingabe.split(" ");
 					if(werte.length==3){
 						try{
-							t.bid(Integer.parseInt(werte[1]),Double.parseDouble(werte[2]));
+							String[] ab=werte[2].split("\\.");
+							if(werte[2].contains(".")&&ab[0].length()>7){
+								werte[2]=ab[0].substring(ab[0].length()-7)+"."+ab[1];
+								System.out.println("Too large amount, max 7 numbers before '.'");
+							}
+							double erg=Double.parseDouble(werte[2]);
+							erg=Math.rint(erg*100)/100;
+							t.bid(Integer.parseInt(werte[1]),erg);
 						}catch(NumberFormatException e){
 							cli.out("ID or Amount entered incorrect");
 						}
