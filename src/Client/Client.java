@@ -9,18 +9,16 @@ import java.util.Scanner;
  * @version 2013-12-10
  */
 public class Client{
-	String username;
-	boolean loggedIn;
-	String host;
-	int tcpPort;
-	int udpPort;
-	String eingabe;
-	Scanner in;
-	TaskExecuter t;
-	TCPConnector tcp;
-	CLI cli;
-	NotificationReceiver nr;
-	boolean active;
+	private String username;
+	private boolean loggedIn;
+	private String host;
+	private int tcpPort;
+	private int udpPort;
+	private TaskExecuter t;
+	private TCPConnector tcp;
+	private CLI cli;
+	private NotificationReceiver nr;
+	private boolean active;
 	/**
 	 * Constructor sets Server-IP,TCP-Port and UDP-Port
 	 * @param host
@@ -28,7 +26,6 @@ public class Client{
 	 * @param udpPort
 	 */
 	public Client(String host,int tcpPort,int udpPort){
-		eingabe="";
 		loggedIn=false;
 		username="";
 		this.host=host;
@@ -46,6 +43,8 @@ public class Client{
 	 * Reads permantly the user input and calls the methods
 	 */
 	public void run() {
+		String eingabe="";
+		Scanner in;
 		in=new Scanner(System.in);
 		while(active){
 			cli.outln(username+"> ");

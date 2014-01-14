@@ -31,7 +31,7 @@ public class TCPConnector implements Runnable{
 	private Condition con; //Thread wait until message is set
 	private Thread t; //Thread in which program is running
 	//Fehlt Objekt für Ausgabe
-	private ObjectOutputStream objectOutput; //Strem for Output
+	private ObjectOutputStream objectOutput; //Stream for Output
 	private ObjectInputStream input; //Stream for Input
 	UI ui; //Output into CLI/GUI
 	Client client; //Client

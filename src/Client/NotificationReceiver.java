@@ -29,7 +29,7 @@ public class NotificationReceiver implements Runnable{
 		DatagramSocket ds = null;
 		try {
 			ds = new DatagramSocket(client.getUdpPort());
-			System.out.println(client.getUdpPort());
+			//System.out.println(client.getUdpPort());
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
