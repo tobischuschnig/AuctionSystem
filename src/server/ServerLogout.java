@@ -26,7 +26,7 @@ public class ServerLogout implements ServerAction{
 		LogoutMessage logout = (LogoutMessage) message;
 		User loger = null;
 		
-		if(server.getUser().get(message).getName() == null) { //Errormessage if the user doesn't exists
+		if(server.getUser().get(message.getName()) == null) { //Errormessage if the user doesn't exists
 			return "This User doesn't exists!";
 		}
 		loger = server.getUser().get(message.getName());

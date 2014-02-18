@@ -26,7 +26,7 @@ public class ServerList implements ServerAction {
 		String out = "";
 		Set<Integer> wert = server.getAuction().keySet();
 		Iterator<Integer> it = wert.iterator();
-		while(it.hasNext()) {
+		while(it.hasNext()) { 
 			int i = it.next();
 			if(server.getAuction().get(i).isFinished() == false) {
 				String hilf;

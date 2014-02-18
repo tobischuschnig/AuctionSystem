@@ -6,6 +6,7 @@ package server.test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 import model.Auction;
 import model.BidMessage;
@@ -52,16 +53,16 @@ public class ServerTest {
 		wert = server.request(login); //Tests that it isn't possible to log in twice
 		assertEquals(wert,"This User is allready loged in please log out first!");
 		
-		assertEquals(server.getUser().get(0).getName(),"name"); //Tests if the user really exists
+		assertEquals(server.getUser().get("name").getName(),"name"); //Tests if the user really exists
 		
-		server.getUser().get(0).setActive(false); //Login again without messages
+		server.getUser().get("name").setActive(false); //Login again without messages
 		wert = server.request(login);
 		assertEquals(wert,"Successfully loged in as: name\nUnread messages: No Messages");
 		
 		ArrayList<String> messages = new ArrayList();
 		messages.add("Hallo");
-		server.getUser().get(0).setMessages(messages);
-		server.getUser().get(0).setActive(false); //Login again with one message
+		server.getUser().get("name").setMessages(messages);
+		server.getUser().get("name").setActive(false); //Login again with one message
 		wert = server.request(login);
 		assertEquals(wert,"Successfully loged in as: name\nUnread messages: Hallo\n");
 	}
@@ -232,10 +233,10 @@ public class ServerTest {
 	public void testSetUser() {
 		User user = new User();
 		user.setName("name");
-		ArrayList<User> users = new ArrayList();
-		users.add(user);
+		ConcurrentHashMap<String,User> users = new ConcurrentHashMap<String, User>();
+		users.put(user.getName(),user);
 		server.setUser(users);
-		assertEquals(server.getUser().get(0).getName(),"name");
+		assertEquals(server.getUser().get("name").getName(),"name");
 	}
 
 	/**
@@ -246,8 +247,8 @@ public class ServerTest {
 		User user = new User();
 		user.setName("name");
 		Auction auction = new Auction(user ,"auction",10L);
-		ArrayList<Auction> auctions = new ArrayList();
-		auctions.add(auction);
+		ConcurrentHashMap<Integer,Auction> auctions = new ConcurrentHashMap<Integer, Auction>();
+		auctions.put(auction.getId(),auction);
 		server.setAuction(auctions);
 		assertEquals(server.getAuction().get(0).getDescription(),"auction");
 	}
