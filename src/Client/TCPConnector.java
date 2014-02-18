@@ -24,7 +24,7 @@ public class TCPConnector implements Runnable{
 	private ReentrantLock lock = new ReentrantLock(); //To lock specific actions
 	private Condition con; //Thread wait until message is set
 	private Thread t; //Thread in which program is running
-	//Fehlt Objekt für Ausgabe
+	//Fehlt Objekt fuer Ausgabe
 	private ObjectOutputStream objectOutput; //Stream for Output
 	private ObjectInputStream input; //Stream for Input
 	UI ui; //Output into CLI/GUI
