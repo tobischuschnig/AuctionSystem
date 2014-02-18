@@ -34,7 +34,8 @@ public class ServerCreate implements ServerAction{
 		}
 		//adds the auction to the list
 		Auction hilf = new Auction(creater, create.getDesc(),  create.getDuration() , server.getAuction().size() );
-		server.getAuction().add(hilf);
+		server.getAuction().put(hilf.getId(),hilf);
+
 		server.notify(server.getUser(),"An auction '"+hilf.getDescription()+"' with the ID: "
 				+hilf.getId()+" has been created and will end on "
 				+hilf.getDeadline()+".");

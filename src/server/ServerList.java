@@ -1,5 +1,8 @@
 package server;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import model.ListMessage;
 import model.Message;
 
@@ -21,7 +24,10 @@ public class ServerList implements ServerAction {
 	public String doOperation(Message message, Server server) {
 		ListMessage bid = (ListMessage) message;
 		String out = "";
-		for(int i=0;i< server.getAuction().size();i++) { //goes through every auction
+		Set<Integer> wert = server.getAuction().keySet();
+		Iterator<Integer> it = wert.iterator();
+		while(it.hasNext()) {
+			int i = it.next();
 			if(server.getAuction().get(i).isFinished() == false) {
 				String hilf;
 				if (server.getAuction().get(i).getLastUser() == null) { //if there was no bidder
@@ -36,6 +42,7 @@ public class ServerList implements ServerAction {
 						"    from: "+hilf+"\n";
 			}
 		}
+		
 		if(out.equals(""))
 			out = "No auctions yet";
 		return out;
