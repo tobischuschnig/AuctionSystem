@@ -34,7 +34,7 @@ public class Testmain {
 		//User erstellen mit LoginMessage
 		LoginMessage login = new LoginMessage();
 		login.setName("name");
-		login.setAdresse("123");
+		login.setAdresse("123"); 
 		login.setTcpPort(123);
 		login.setUdpPort(123);
 		
@@ -42,6 +42,9 @@ public class Testmain {
 		System.out.println(wert3);
 		wert3 = server.request(login); //testet das doppelt anmelden Funktionier (Fehlermeldung)
 		System.out.println(wert3);
+		login.setName("name2");
+		wert3 = server.request(login);
+		System.out.println(wert3); //anmelden mit zweitem user
 		///////////////////////////
 		
 		
@@ -54,7 +57,7 @@ public class Testmain {
 		create.setDuration(duration);
 		/////
 		String wert1 = server.request(create);
-		System.out.println(wert1);
+		System.out.println(wert1); //TODO warum hier Could not send Paket?
 		
 		//System.out.println(server.getAuction().get(0).getDeadline());
 		
@@ -75,6 +78,7 @@ public class Testmain {
 		System.out.println(wert);
 		
 		bid.setAmount(200.20);
+		bid.setName("name2");
 		wert = server.request(bid);
 		System.out.println(wert);
 		///////////////////////
