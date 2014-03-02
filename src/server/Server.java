@@ -23,7 +23,7 @@ public class Server {
 	private ConcurrentHashMap<Integer, Auction> auction;
 	private AuctionHandler ahandler;
 	private RequestHandler rhandler; 
-	private Notifier udp;
+	//private Notifier udp;
 	private boolean active;
 	
 	/**
@@ -36,7 +36,7 @@ public class Server {
 		auction=new ConcurrentHashMap<Integer,Auction>();
 		ahandler = new AuctionHandler(this);
 		rhandler = new RequestHandler();
-		udp = NotifierFactory.getUDPNotifer();
+		//udp = NotifierFactory.getUDPNotifer();
 		Thread athread = new Thread();
 		athread.setPriority(Thread.MIN_PRIORITY);
 		new Thread(ahandler).start();
@@ -64,7 +64,7 @@ public class Server {
 		while(it.hasNext()) { 
 			users.add(al.get(it.next()));
 		}
-		udp.notify(users,message);
+//		udp.notify(users,message);
 		System.out.println(message); //TODO only for testing after that delete
 	}
 	
@@ -140,20 +140,20 @@ public class Server {
 	public void setRhandler(RequestHandler rhandler) {
 		this.rhandler = rhandler;
 	}
-
-	/**
-	 * @return the udp
-	 */
-	public Notifier getUdp() {
-		return udp;
-	}
-
-	/**
-	 * @param udp the udp to set
-	 */
-	public void setUdp(Notifier udp) {
-		this.udp = udp;
-	}
+//
+//	/**
+//	 * @return the udp
+//	 */
+//	public Notifier getUdp() {
+//		return udp;
+//	}
+//
+//	/**
+//	 * @param udp the udp to set
+//	 */
+//	public void setUdp(Notifier udp) {
+//		this.udp = udp;
+//	}
 
 	public boolean isActive() {
 

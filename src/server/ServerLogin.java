@@ -31,7 +31,7 @@ public class ServerLogin implements ServerAction {
 			loger.setName(bid.getName());
 			loger.setAdresse(bid.getAdresse()); 
 			loger.setTcpPort(bid.getTcpPort()); 
-			loger.setUdpPort(bid.getUdpPort()); 
+//			loger.setUdpPort(bid.getUdpPort()); 
 			loger.setActive(true);
 			loger.setMessages(new ArrayList<String>());
 			server.getUser().put(loger.getName(),loger);
@@ -42,7 +42,7 @@ public class ServerLogin implements ServerAction {
 		if (loger != null && loger.isActive()==false){ //if the user exists active is set true
 			loger.setAdresse(bid.getAdresse()); 
 			loger.setTcpPort(bid.getTcpPort()); 
-			loger.setUdpPort(bid.getUdpPort()); 
+//			loger.setUdpPort(bid.getUdpPort()); 
 			loger.setActive(true);
 			if(loger.getMessages().size() != 0){
 				for(String s : loger.getMessages())

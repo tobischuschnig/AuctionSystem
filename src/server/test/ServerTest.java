@@ -45,7 +45,7 @@ public class ServerTest {
 		login.setName("name");
 		login.setAdresse("127.0.0.1");
 		login.setTcpPort(123);
-		login.setUdpPort(123);
+//		login.setUdpPort(123);
 		
 		String wert = server.request(login); //Tests the login
 		assertEquals(wert,"Successfully suscribed and loged in as: name");
@@ -73,7 +73,7 @@ public class ServerTest {
 		login.setName("name");
 		login.setAdresse("127.0.0.1");
 		login.setTcpPort(123);
-		login.setUdpPort(123);
+//		login.setUdpPort(123);
 		
 		String wert = server.request(login); //Before testing logout i must test login
 		assertEquals(wert,"Successfully suscribed and loged in as: name");
@@ -97,7 +97,7 @@ public class ServerTest {
 		login.setName("name");
 		login.setAdresse("127.0.0.1");
 		login.setTcpPort(123);
-		login.setUdpPort(123);
+//		login.setUdpPort(123);
 		
 		String wert = server.request(login); //Before testing create i must test login and need a user
 		assertEquals(wert,"Successfully suscribed and loged in as: name");
@@ -123,7 +123,7 @@ public class ServerTest {
 		login.setName("name");
 		login.setAdresse("127.0.0.1");
 		login.setTcpPort(123);
-		login.setUdpPort(123);
+//		login.setUdpPort(123);
 		
 		String wert = server.request(login); //Before testing bid i must test login and need a user
 		assertEquals(wert,"Successfully suscribed and loged in as: name");
@@ -182,7 +182,7 @@ public class ServerTest {
 		login.setName("name");
 		login.setAdresse("127.0.0.1");
 		login.setTcpPort(123);
-		login.setUdpPort(123);
+//		login.setUdpPort(123);
 		
 		String wert = server.request(login); //Before testing list i must test login and need a user
 		assertEquals(wert,"Successfully suscribed and loged in as: name");
